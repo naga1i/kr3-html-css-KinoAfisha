@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Главная страница кинотеатра KinoAfisha — расписание сеансов, залы IMAX, комфортные кресла и быстрое бронирование билетов.">
+  <title>Главная — Кинотеатр KinoAfisha</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body class="page">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-header__logo" href="index.html">
+        KinoAfisha
+        <span class="site-header__logo-badge">IMAX</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Основная навигация">
+        <ul class="site-nav__list">
+          <li class="site-nav__item"><a class="site-nav__link site-nav__link--active" href="index.html">Главная</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="afisha.html">Афиша</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="booking.html">Бронирование</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="contacts.html">Контакты</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="index.html#advantages">Преимущества</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="index.html#now-playing">Сейчас в кино</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page__main">
+    <div class="success-message alert alert-success" id="success-message" role="status" hidden>
+      <strong>Бронирование успешно оформлено!</strong> Код брони отправлен по SMS на указанный номер телефона. Ждём вас в кинотеатре «KinoAfisha».
+    </div>
+
+    <section class="hero">
+      <span class="hero__badge">Лазерный IMAX &bull; Dolby Atmos</span>
+      <h1 class="hero__title">Кинотеатр нового поколения «KinoAfisha»</h1>
+      <p class="hero__text">
+        Погрузитесь в мир большого кино на гигантском экране IMAX с объёмным звуком Dolby Atmos,
+        мягкими креслами-реклайнерами и свежим карамельным попкорном из нашего кинобара.
+      </p>
+      <div class="hero__actions">
+        <button class="button button--primary btn-lg" type="button" id="hero-buy-ticket-btn" data-movie="Дюна: Хроники Арракиса">
+          Купить билет
+        </button>
+        <a class="button button--outline-light" href="afisha.html">Смотреть всю афишу</a>
+      </div>
+    </section>
+
+    <section class="section" id="advantages">
+      <div class="section__header">
+        <div>
+          <h2 class="section__title">Преимущества нашего кинотеатра</h2>
+          <p class="section__text">Всё для максимального комфорта и полного погружения в сюжет каждого фильма.</p>
+        </div>
+      </div>
+
+      <div class="advantages-grid row g-4">
+        <div class="col-md-4">
+          <article class="advantage-card h-100">
+            <div class="advantage-card__icon" aria-hidden="true">4K</div>
+            <h3 class="advantage-card__title">Залы IMAX</h3>
+            <p class="advantage-card__text">
+              Двойная лазерная проекция 4K на изогнутый экран шириной 24 метра и многоканальная акустика Dolby Atmos обеспечивают кристальную чёткость и живой объёмный звук.
+            </p>
+          </article>
+        </div>
+
+        <div class="col-md-4">
+          <article class="advantage-card h-100">
+            <div class="advantage-card__icon" aria-hidden="true">VIP</div>
+            <h3 class="advantage-card__title">Удобные кресла</h3>
+            <p class="advantage-card__text">
+              Анатомические кожаные кресла-реклайнеры с электроприводом спинки и подставки для ног, увеличенным расстоянием между рядами и индивидуальными столиками.
+            </p>
+          </article>
+        </div>
+
+        <div class="col-md-4">
+          <article class="advantage-card h-100">
+            <div class="advantage-card__icon" aria-hidden="true">BAR</div>
+            <h3 class="advantage-card__title">Кинобар и лаунж</h3>
+            <p class="advantage-card__text">
+              Хрустящий сырный и карамельный попкорн, начос с горячими соусами, крафтовые лимонады и свежесваренный кофе с возможностью заказа прямо к вашему креслу.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="now-playing">
+      <div class="section__header">
+        <div>
+          <h2 class="section__title">Сейчас в кино</h2>
+          <p class="section__text">Главные премьеры недели — выбирайте удобный сеанс и бронируйте лучшие места.</p>
+        </div>
+        <a class="button button--secondary" href="afisha.html">Все 8 фильмов в афише</a>
+      </div>
+
+      <div class="movies-grid">
+        <article class="movie-card movie-card--premiere">
+          <div class="movie-card__poster-wrap">
+            <img class="movie-card__image" src="images/movie-1.jpg" alt="Постер фильма Дюна: Хроники Арракиса" width="600" height="850" loading="lazy">
+            <span class="movie-card__badge movie-card__badge--premiere badge">Премьера</span>
+            <span class="movie-card__age">16+</span>
+          </div>
+          <div class="movie-card__meta">
+            <span class="movie-card__genre">Фантастика, приключения</span>
+            <span>155 мин. &bull; IMAX</span>
+          </div>
+          <h3 class="movie-card__title">Дюна: Хроники Арракиса</h3>
+          <p class="movie-card__description">Эпическое продолжение борьбы за пустынную планету и судьбу всей Галактики.</p>
+          <p class="movie-card__price">От 550 руб.</p>
+          <div class="movie-card__actions">
+            <button class="button button--primary movie-card__button js-quick-book" type="button" data-movie="Дюна: Хроники Арракиса">
+              Быстрая бронь
+            </button>
+            <a class="button button--secondary" href="booking.html?movie=dune">Выбрать места</a>
+          </div>
+        </article>
+
+        <article class="movie-card movie-card--hit">
+          <div class="movie-card__poster-wrap">
+            <img class="movie-card__image" src="images/movie-2.jpg" alt="Постер фильма Ночной рубеж: Токио" width="600" height="850" loading="lazy">
+            <span class="movie-card__badge movie-card__badge--hit badge">Хит</span>
+            <span class="movie-card__age">18+</span>
+          </div>
+          <div class="movie-card__meta">
+            <span class="movie-card__genre">Боевик, киберпанк</span>
+            <span>128 мин. &bull; 2D / Atmos</span>
+          </div>
+          <h3 class="movie-card__title">Ночной рубеж: Токио</h3>
+          <p class="movie-card__description">Спецагент отдела кибербезопасности выходит на след теневого синдиката мегаполиса.</p>
+          <p class="movie-card__price">От 480 руб.</p>
+          <div class="movie-card__actions">
+            <button class="button button--primary movie-card__button js-quick-book" type="button" data-movie="Ночной рубеж: Токио">
+              Быстрая бронь
+            </button>
+            <a class="button button--secondary" href="booking.html?movie=tokyo">Выбрать места</a>
+          </div>
+        </article>
+
+        <article class="movie-card movie-card--premiere">
+          <div class="movie-card__poster-wrap">
+            <img class="movie-card__image" src="images/movie-3.jpg" alt="Постер мультфильма Хранители звёздного леса" width="600" height="850" loading="lazy">
+            <span class="movie-card__badge movie-card__badge--premiere badge">Премьера</span>
+            <span class="movie-card__age">6+</span>
+          </div>
+          <div class="movie-card__meta">
+            <span class="movie-card__genre">Анимация, семейный</span>
+            <span>102 мин. &bull; 3D</span>
+          </div>
+          <h3 class="movie-card__title">Хранители звёздного леса</h3>
+          <p class="movie-card__description">Добрая история о юном изобретателе и волшебных духах древнего леса для всей семьи.</p>
+          <p class="movie-card__price">От 390 руб.</p>
+          <div class="movie-card__actions">
+            <button class="button button--primary movie-card__button js-quick-book" type="button" data-movie="Хранители звёздного леса">
+              Быстрая бронь
+            </button>
+            <a class="button button--secondary" href="booking.html?movie=forest">Выбрать места</a>
+          </div>
+        </article>
+
+        <article class="movie-card movie-card--hit">
+          <div class="movie-card__poster-wrap">
+            <img class="movie-card__image" src="images/movie-4.jpg" alt="Постер фильма Горизонт событий" width="600" height="850" loading="lazy">
+            <span class="movie-card__badge movie-card__badge--hit badge">Хит</span>
+            <span class="movie-card__age">12+</span>
+          </div>
+          <div class="movie-card__meta">
+            <span class="movie-card__genre">Фантастика, драма</span>
+            <span>142 мин. &bull; IMAX</span>
+          </div>
+          <h3 class="movie-card__title">Горизонт событий</h3>
+          <p class="movie-card__description">Экспедиция к далёкой экзопланете сталкивается с загадочным гравитационным сигналом.</p>
+          <p class="movie-card__price">От 520 руб.</p>
+          <div class="movie-card__actions">
+            <button class="button button--primary movie-card__button js-quick-book" type="button" data-movie="Горизонт событий">
+              Быстрая бронь
+            </button>
+            <a class="button button--secondary" href="booking.html?movie=horizon">Выбрать места</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <p class="site-footer__text"><strong>&copy; 2026 Кинотеатр «KinoAfisha».</strong> Учебный проект.</p>
+        <p class="site-footer__text">Автор: Крапчатов Г.П., группа ЭФБО-11-25</p>
+      </div>
+      <div>
+        <p class="site-footer__text">г. Москва, пр-т Вернадского, д. 78 &bull; Ежедневно с 09:00 до 02:00</p>
+        <p class="site-footer__text">Телефон кассы: +7 (495) 777-24-00</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="button button--primary scroll-top" type="button" id="scroll-top" hidden aria-label="Наверх">
+    Наверх &uarr;
+  </button>
+
+  <dialog class="booking-dialog" id="quick-booking-dialog" aria-labelledby="quick-booking-title">
+    <div class="booking-dialog__inner">
+      <button class="booking-dialog__close" type="button" id="close-booking-dialog-cross" aria-label="Закрыть окно">&times;</button>
+      <h2 class="booking-dialog__title" id="quick-booking-title">Быстрое бронирование</h2>
+      <p class="booking-dialog__movie" id="dialog-movie-name">Вы выбрали: Дюна: Хроники Арракиса</p>
+
+      <form class="booking-form" id="quick-booking-form" action="#" method="post" novalidate>
+        <div class="booking-form__field">
+          <label class="booking-form__label" for="quick-movie">
+            Фильм <span class="booking-form__required" aria-hidden="true">*</span>
+          </label>
+          <select class="booking-form__select form-select" id="quick-movie" name="movie" required>
+            <option value="Дюна: Хроники Арракиса">Дюна: Хроники Арракиса (16+)</option>
+            <option value="Ночной рубеж: Токио">Ночной рубеж: Токио (18+)</option>
+            <option value="Хранители звёздного леса">Хранители звёздного леса (6+)</option>
+            <option value="Горизонт событий">Горизонт событий (12+)</option>
+            <option value="Тайна старого маяка">Тайна старого маяка (12+)</option>
+            <option value="Последний симфонический концерт">Последний симфонический концерт (16+)</option>
+          </select>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <div class="booking-form__field">
+              <label class="booking-form__label" for="quick-session">
+                Сеанс <span class="booking-form__required" aria-hidden="true">*</span>
+              </label>
+              <select class="booking-form__select form-select" id="quick-session" name="session" required>
+                <option value="12:30">12:30 (Дневной)</option>
+                <option value="16:00">16:00 (Дневной)</option>
+                <option value="19:30" selected>19:30 (Вечерний IMAX)</option>
+                <option value="22:15">22:15 (Ночной VIP)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="booking-form__field">
+              <label class="booking-form__label" for="quick-tickets">
+                Количество билетов <span class="booking-form__required" aria-hidden="true">*</span>
+              </label>
+              <input
+                class="booking-form__input form-control"
+                id="quick-tickets"
+                name="tickets"
+                type="number"
+                min="1"
+                max="10"
+                value="2"
+                required
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-form__field">
+          <label class="booking-form__label" for="quick-name">
+            Ваше имя <span class="booking-form__required" aria-hidden="true">*</span>
+          </label>
+          <input
+            class="booking-form__input form-control"
+            id="quick-name"
+            name="name"
+            type="text"
+            placeholder="Введите ваше имя"
+            minlength="2"
+            autocomplete="given-name"
+            required
+          >
+        </div>
+
+        <div class="booking-form__field">
+          <label class="booking-form__label" for="quick-phone">
+            Телефон для SMS с билетом <span class="booking-form__required" aria-hidden="true">*</span>
+          </label>
+          <input
+            class="booking-form__input form-control"
+            id="quick-phone"
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            placeholder="+7 (900) 000-00-00"
+            required
+          >
+          <small class="booking-form__hint">Мы отправим номер брони по SMS за 30 минут до начала сеанса.</small>
+        </div>
+
+        <div class="booking-form__field booking-form__field--checkbox">
+          <label class="booking-form__label" for="quick-agreement">
+            <input class="booking-form__checkbox form-check-input mt-0" id="quick-agreement" name="agreement" type="checkbox" required checked>
+            <span>Согласен с правилами посещения кинотеатра и обработкой данных <span class="booking-form__required" aria-hidden="true">*</span></span>
+          </label>
+        </div>
+
+        <div class="booking-form__actions">
+          <button class="button button--primary" type="submit">Подтвердить бронь</button>
+          <button class="button button--secondary" type="reset">Очистить</button>
+          <button class="button button--secondary" type="button" id="close-booking-dialog">Закрыть</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+</body>
+</html>
