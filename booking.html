@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Бронирование билетов в кинотеатре KinoAfisha — выбор фильма, даты, сеанса, интерактивная схема зала и таблица цен.">
+  <meta name="description" content="Бронирование билетов в кинотеатре KinoAfisha — выбор фильма, даты, сеанса и интерактивная схема зала с выбором мест для каждого фильма.">
   <title>Бронирование — Кинотеатр KinoAfisha</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -43,13 +43,13 @@
     <section class="section">
       <h1 class="section__title">Бронирование билетов</h1>
       <p class="section__text">
-        Выберите фильм, удобную дату и время сеанса, отметьте понравившиеся места на схеме зала и подтвердите заказ.
+        Выберите фильм, удобную дату и время сеанса — для каждого фильма откроется схема соответствующего кинозала.
         Поля, отмеченные <span class="booking-form__required" aria-hidden="true">*</span>, обязательны для заполнения.
       </p>
     </section>
 
     <form id="booking-page-form" action="#" method="post" novalidate>
-      <input type="hidden" id="booking-selected-seats" name="selected_seats" value="Ряд 3, Место 4; Ряд 3, Место 5">
+      <input type="hidden" id="booking-selected-seats" name="selected_seats" value="">
 
       <section class="booking-layout">
         <!-- Левая колонка: форма параметров сеанса и контактов -->
@@ -62,15 +62,16 @@
                 Выбор фильма <span class="booking-form__required" aria-hidden="true">*</span>
               </label>
               <select class="booking-form__select form-select" id="booking-movie" name="movie" required>
-                <option value="Дюна: Хроники Арракиса">Дюна: Хроники Арракиса (16+, IMAX)</option>
-                <option value="Ночной рубеж: Токио">Ночной рубеж: Токио (18+, Dolby Atmos)</option>
-                <option value="Хранители звёздного леса">Хранители звёздного леса (6+, 3D)</option>
-                <option value="Горизонт событий">Горизонт событий (12+, IMAX)</option>
-                <option value="Тайна старого маяка">Тайна старого маяка (12+, 2D)</option>
-                <option value="Последний симфонический концерт">Последний симфонический концерт (16+, VIP)</option>
-                <option value="Марсианский экспресс 2099">Марсианский экспресс 2099 (6+, Предпродажа)</option>
-                <option value="Тень над Северным морем">Тень над Северным морем (18+, Предпродажа)</option>
+                <option value="Рождение империи">Рождение империи (12+ &bull; Зал №1 IMAX Laser)</option>
+                <option value="Битва моторов">Битва моторов (12+ &bull; Зал №2 Dolby Atmos)</option>
+                <option value="Барашек Шон и Чудище Лохматое">Барашек Шон и Чудище Лохматое (6+ &bull; Зал №3 Семейный)</option>
+                <option value="Чудо-Юдо">Чудо-Юдо (6+ &bull; Зал №4 Комфорт)</option>
+                <option value="Большие гонки. Пегас III">Большие гонки. Пегас III (16+ &bull; Зал №5 Драйв)</option>
+                <option value="Зверь">Зверь (18+ &bull; Зал №6 VIP Lounge)</option>
+                <option value="Голодные игры: Рассвет жатвы">Голодные игры: Рассвет жатвы (12+ &bull; Зал №1 IMAX Laser)</option>
+                <option value="Чебурашка 3">Чебурашка 3 (6+ &bull; Зал №3 Семейный)</option>
               </select>
+              <small class="booking-form__hint">При смене фильма автоматически загружается схема его кинозала и свободные места.</small>
             </div>
 
             <div class="row g-3">
@@ -99,7 +100,7 @@
                     <option value="10:30">10:30 (Утренний)</option>
                     <option value="14:00">14:00 (Дневной)</option>
                     <option value="17:30">17:30 (Дневной)</option>
-                    <option value="20:00" selected>20:00 (Вечерний IMAX)</option>
+                    <option value="20:00" selected>20:00 (Вечерний сеанс)</option>
                     <option value="23:10">23:10 (Ночной показ)</option>
                   </select>
                 </div>
@@ -134,7 +135,7 @@
                   </label>
                   <select class="booking-form__select form-select" id="booking-seat-type" name="seat_type" required>
                     <option value="standard" selected>Обычный (Стандарт) — 450 руб.</option>
-                    <option value="vip">VIP (Реклайнер, 5 ряд) — 850 руб.</option>
+                    <option value="vip">VIP (Реклайнер) — 850 руб.</option>
                     <option value="child">Детский (до 12 лет) — 300 руб.</option>
                     <option value="student">Студенческий — 350 руб.</option>
                   </select>
@@ -211,74 +212,14 @@
         <!-- Правая колонка: интерактивная схема зала и итоговая стоимость -->
         <div class="booking-hall-column">
           <div class="hall-card">
-            <h2 class="h5 fw-bold mb-3 text-center">3. Схема зала №1 (IMAX Laser) — выберите места</h2>
-            <div class="hall-screen" aria-hidden="true">Экран IMAX 24 м</div>
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+              <h2 class="h5 fw-bold m-0" id="hall-title">3. Зал №1 (IMAX Laser) — выберите места</h2>
+              <span class="badge bg-dark" id="hall-badge">5 рядов &bull; 45 мест</span>
+            </div>
+            <div class="hall-screen" id="hall-screen" aria-hidden="true">Экран IMAX 24 м</div>
 
             <div class="hall-grid" id="hall-grid" role="group" aria-label="Схема мест кинозала">
-              <!-- Ряд 1 -->
-              <div class="hall-row">
-                <span class="hall-row__label">Ряд 1</span>
-                <button class="seat" type="button" data-row="1" data-seat="1" data-seat-type="standard" aria-label="Ряд 1 Место 1">1</button>
-                <button class="seat" type="button" data-row="1" data-seat="2" data-seat-type="standard" aria-label="Ряд 1 Место 2">2</button>
-                <button class="seat seat--occupied" type="button" data-row="1" data-seat="3" disabled aria-label="Ряд 1 Место 3 занято">3</button>
-                <button class="seat seat--occupied" type="button" data-row="1" data-seat="4" disabled aria-label="Ряд 1 Место 4 занято">4</button>
-                <button class="seat" type="button" data-row="1" data-seat="5" data-seat-type="standard" aria-label="Ряд 1 Место 5">5</button>
-                <button class="seat" type="button" data-row="1" data-seat="6" data-seat-type="standard" aria-label="Ряд 1 Место 6">6</button>
-                <button class="seat" type="button" data-row="1" data-seat="7" data-seat-type="standard" aria-label="Ряд 1 Место 7">7</button>
-                <button class="seat" type="button" data-row="1" data-seat="8" data-seat-type="standard" aria-label="Ряд 1 Место 8">8</button>
-              </div>
-
-              <!-- Ряд 2 -->
-              <div class="hall-row">
-                <span class="hall-row__label">Ряд 2</span>
-                <button class="seat" type="button" data-row="2" data-seat="1" data-seat-type="standard" aria-label="Ряд 2 Место 1">1</button>
-                <button class="seat" type="button" data-row="2" data-seat="2" data-seat-type="standard" aria-label="Ряд 2 Место 2">2</button>
-                <button class="seat" type="button" data-row="2" data-seat="3" data-seat-type="standard" aria-label="Ряд 2 Место 3">3</button>
-                <button class="seat" type="button" data-row="2" data-seat="4" data-seat-type="standard" aria-label="Ряд 2 Место 4">4</button>
-                <button class="seat seat--occupied" type="button" data-row="2" data-seat="5" disabled aria-label="Ряд 2 Место 5 занято">5</button>
-                <button class="seat seat--occupied" type="button" data-row="2" data-seat="6" disabled aria-label="Ряд 2 Место 6 занято">6</button>
-                <button class="seat" type="button" data-row="2" data-seat="7" data-seat-type="standard" aria-label="Ряд 2 Место 7">7</button>
-                <button class="seat" type="button" data-row="2" data-seat="8" data-seat-type="standard" aria-label="Ряд 2 Место 8">8</button>
-              </div>
-
-              <!-- Ряд 3 (по умолчанию выбраны места 4 и 5) -->
-              <div class="hall-row">
-                <span class="hall-row__label">Ряд 3</span>
-                <button class="seat" type="button" data-row="3" data-seat="1" data-seat-type="standard" aria-label="Ряд 3 Место 1">1</button>
-                <button class="seat" type="button" data-row="3" data-seat="2" data-seat-type="standard" aria-label="Ряд 3 Место 2">2</button>
-                <button class="seat" type="button" data-row="3" data-seat="3" data-seat-type="standard" aria-label="Ряд 3 Место 3">3</button>
-                <button class="seat seat--selected" type="button" data-row="3" data-seat="4" data-seat-type="standard" aria-pressed="true" aria-label="Ряд 3 Место 4 выбрано">4</button>
-                <button class="seat seat--selected" type="button" data-row="3" data-seat="5" data-seat-type="standard" aria-pressed="true" aria-label="Ряд 3 Место 5 выбрано">5</button>
-                <button class="seat" type="button" data-row="3" data-seat="6" data-seat-type="standard" aria-label="Ряд 3 Место 6">6</button>
-                <button class="seat" type="button" data-row="3" data-seat="7" data-seat-type="standard" aria-label="Ряд 3 Место 7">7</button>
-                <button class="seat" type="button" data-row="3" data-seat="8" data-seat-type="standard" aria-label="Ряд 3 Место 8">8</button>
-              </div>
-
-              <!-- Ряд 4 -->
-              <div class="hall-row">
-                <span class="hall-row__label">Ряд 4</span>
-                <button class="seat" type="button" data-row="4" data-seat="1" data-seat-type="standard" aria-label="Ряд 4 Место 1">1</button>
-                <button class="seat seat--occupied" type="button" data-row="4" data-seat="2" disabled aria-label="Ряд 4 Место 2 занято">2</button>
-                <button class="seat seat--occupied" type="button" data-row="4" data-seat="3" disabled aria-label="Ряд 4 Место 3 занято">3</button>
-                <button class="seat" type="button" data-row="4" data-seat="4" data-seat-type="standard" aria-label="Ряд 4 Место 4">4</button>
-                <button class="seat" type="button" data-row="4" data-seat="5" data-seat-type="standard" aria-label="Ряд 4 Место 5">5</button>
-                <button class="seat" type="button" data-row="4" data-seat="6" data-seat-type="standard" aria-label="Ряд 4 Место 6">6</button>
-                <button class="seat seat--occupied" type="button" data-row="4" data-seat="7" disabled aria-label="Ряд 4 Место 7 занято">7</button>
-                <button class="seat" type="button" data-row="4" data-seat="8" data-seat-type="standard" aria-label="Ряд 4 Место 8">8</button>
-              </div>
-
-              <!-- Ряд 5 VIP -->
-              <div class="hall-row">
-                <span class="hall-row__label">Ряд 5 VIP</span>
-                <button class="seat seat--vip" type="button" data-row="5" data-seat="1" data-seat-type="vip" aria-label="Ряд 5 VIP Место 1">1</button>
-                <button class="seat seat--vip" type="button" data-row="5" data-seat="2" data-seat-type="vip" aria-label="Ряд 5 VIP Место 2">2</button>
-                <button class="seat seat--vip seat--occupied" type="button" data-row="5" data-seat="3" disabled aria-label="Ряд 5 VIP Место 3 занято">3</button>
-                <button class="seat seat--vip" type="button" data-row="5" data-seat="4" data-seat-type="vip" aria-label="Ряд 5 VIP Место 4">4</button>
-                <button class="seat seat--vip" type="button" data-row="5" data-seat="5" data-seat-type="vip" aria-label="Ряд 5 VIP Место 5">5</button>
-                <button class="seat seat--vip" type="button" data-row="5" data-seat="6" data-seat-type="vip" aria-label="Ряд 5 VIP Место 6">6</button>
-                <button class="seat seat--vip" type="button" data-row="5" data-seat="7" data-seat-type="vip" aria-label="Ряд 5 VIP Место 7">7</button>
-                <button class="seat seat--vip" type="button" data-row="5" data-seat="8" data-seat-type="vip" aria-label="Ряд 5 VIP Место 8">8</button>
-              </div>
+              <!-- Схема зала заполняется динамически в зависимости от выбранного фильма -->
             </div>
 
             <div class="hall-legend">
@@ -307,7 +248,11 @@
             <ul class="order-summary__list">
               <li class="order-summary__item">
                 <span>Фильм:</span>
-                <strong id="summary-movie">Дюна: Хроники Арракиса</strong>
+                <strong id="summary-movie">Рождение империи</strong>
+              </li>
+              <li class="order-summary__item">
+                <span>Кинозал:</span>
+                <strong id="summary-hall">Зал №1 (IMAX Laser)</strong>
               </li>
               <li class="order-summary__item">
                 <span>Дата и сеанс:</span>
@@ -340,66 +285,6 @@
         </div>
       </section>
     </form>
-
-    <!-- Таблица цен на билеты -->
-    <section class="section" id="price-table-section">
-      <h2 class="section__title">Таблица цен на билеты</h2>
-      <p class="section__text">
-        Стоимость билетов зависит от выбранной категории места, времени сеанса и действующих льгот.
-      </p>
-
-      <div class="table-wrapper">
-        <table class="price-table table mb-0">
-          <caption class="price-table__caption">Тарифы кинотеатра «KinoAfisha» на 2026 год</caption>
-          <thead>
-            <tr>
-              <th class="price-table__cell price-table__cell--head" scope="col">Тип билета</th>
-              <th class="price-table__cell price-table__cell--head" scope="col">Описание категории и мест</th>
-              <th class="price-table__cell price-table__cell--head" scope="col">Утренние (до 13:00)</th>
-              <th class="price-table__cell price-table__cell--head" scope="col">Дневные (13:00–18:00)</th>
-              <th class="price-table__cell price-table__cell--head" scope="col">Вечерние / Базовый тариф</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th class="price-table__cell price-table__cell--head" scope="row">Обычный</th>
-              <td class="price-table__cell">Стандартные эргономичные кресла (ряды 1–4) с подстаканниками</td>
-              <td class="price-table__cell">350 руб.</td>
-              <td class="price-table__cell">400 руб.</td>
-              <td class="price-table__cell"><strong>450 руб.</strong></td>
-            </tr>
-            <tr>
-              <th class="price-table__cell price-table__cell--head" scope="row">VIP</th>
-              <td class="price-table__cell">Кожаные кресла-реклайнеры с электроприводом и столиком (ряд 5 VIP)</td>
-              <td class="price-table__cell">700 руб.</td>
-              <td class="price-table__cell">780 руб.</td>
-              <td class="price-table__cell"><strong>850 руб.</strong></td>
-            </tr>
-            <tr>
-              <th class="price-table__cell price-table__cell--head" scope="row">Детский</th>
-              <td class="price-table__cell">Для зрителей до 12 лет включительно на сеансы 0+, 6+ и 12+</td>
-              <td class="price-table__cell">240 руб.</td>
-              <td class="price-table__cell">270 руб.</td>
-              <td class="price-table__cell"><strong>300 руб.</strong></td>
-            </tr>
-            <tr>
-              <th class="price-table__cell price-table__cell--head" scope="row">Студенческий</th>
-              <td class="price-table__cell">По предъявлению действующего студенческого билета в кассе или на контроле</td>
-              <td class="price-table__cell">290 руб.</td>
-              <td class="price-table__cell">320 руб.</td>
-              <td class="price-table__cell"><strong>350 руб.</strong></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td class="price-table__cell price-table__footer" colspan="5">
-                Все цены указаны в рублях с учётом НДС. При онлайн-бронировании на сайте комиссия не взимается.
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
