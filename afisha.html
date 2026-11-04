@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Афиша кинотеатра KinoAfisha — 8 фильмов в прокате и скоро на экранах, фильтрация по жанру и возрастному рейтингу.">
+  <title>Афиша — Кинотеатр KinoAfisha</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body class="page">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-header__logo" href="index.html">
+        KinoAfisha
+        <span class="site-header__logo-badge">IMAX</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Основная навигация">
+        <ul class="site-nav__list">
+          <li class="site-nav__item"><a class="site-nav__link" href="index.html">Главная</a></li>
+          <li class="site-nav__item"><a class="site-nav__link site-nav__link--active" href="afisha.html">Афиша</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="booking.html">Бронирование</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="contacts.html">Контакты</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="index.html#advantages">Преимущества</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="index.html#now-playing">Сейчас в кино</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page__main">
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a class="breadcrumbs__link" href="index.html">Главная</a>
+      <span class="breadcrumbs__current">Афиша</span>
+    </nav>
+
+    <section class="section">
+      <h1 class="section__title">Афиша кинотеатра</h1>
+      <p class="section__text">
+        Выберите интересующий жанр и возрастной рейтинг, чтобы подобрать фильм для вечернего сеанса или семейного похода в кино.
+      </p>
+    </section>
+
+    <section class="afisha-layout">
+      <aside class="afisha-filters" aria-label="Фильтры афиши">
+        <h2 class="afisha-filters__title">Фильтры</h2>
+
+        <form class="filters-form" id="afisha-filter-form" action="#" method="get">
+          <fieldset class="filters-form__fieldset">
+            <legend class="filters-form__legend">По жанру</legend>
+
+            <label class="filters-form__label">
+              <input class="form-check-input mt-0" type="radio" name="genre" value="all" checked>
+              <span>Все жанры</span>
+            </label>
+
+            <label class="filters-form__label">
+              <input class="form-check-input mt-0" type="radio" name="genre" value="scifi">
+              <span>Фантастика</span>
+            </label>
+
+            <label class="filters-form__label">
+              <input class="form-check-input mt-0" type="radio" name="genre" value="action">
+              <span>Боевик</span>
+            </label>
+
+            <label class="filters-form__label">
+              <input class="form-check-input mt-0" type="radio" name="genre" value="animation">
+              <span>Анимация</span>
+            </label>
+
+            <label class="filters-form__label">
+              <input class="form-check-input mt-0" type="radio" name="genre" value="drama">
+              <span>Драма</span>
+            </label>
+
+            <label class="filters-form__label">
+              <input class="form-check-input mt-0" type="radio" name="genre" value="thriller">
+              <span>Триллер</span>
+            </label>
+          </fieldset>
+
+          <fieldset class="filters-form__fieldset">
+            <legend class="filters-form__legend">По возрастному рейтингу</legend>
+
+            <label class="filters-form__label">
+              <input class="form-check-input mt-0" type="checkbox" name="age" value="6+">
+              <span>6+ (Семейное кино)</span>
+            </label>
+
+            <label class="filters-form__label">
+              <input class="form-check-input mt-0" type="checkbox" name="age" value="12+">
+              <span>12+ (Подростковое)</span>
+            </label>
+
+            <label class="filters-form__label">
+              <input class="form-check-input mt-0" type="checkbox" name="age" value="16+">
+              <span>16+ (Молодёжное)</span>
+            </label>
+
+            <label class="filters-form__label">
+              <input class="form-check-input mt-0" type="checkbox" name="age" value="18+">
+              <span>18+ (Для взрослых)</span>
+            </label>
+          </fieldset>
+
+          <fieldset class="filters-form__fieldset">
+            <legend class="filters-form__legend">Статус в прокате</legend>
+            <label class="booking-form__label visually-hidden" for="filter-badge">Выберите бейдж</label>
+            <select class="booking-form__select form-select" id="filter-badge" name="badge">
+              <option value="all">Все фильмы</option>
+              <option value="Премьера">Премьера</option>
+              <option value="Хит">Хит</option>
+              <option value="Скоро">Скоро</option>
+            </select>
+          </fieldset>
+
+          <div class="filters-form__actions">
+            <button class="button button--primary w-100" type="submit">Применить фильтры</button>
+            <button class="button button--secondary w-100" type="reset">Сбросить</button>
+          </div>
+        </form>
+      </aside>
+
+      <section class="afisha-movies">
+        <div class="afisha-movies__header">
+          <h2 class="afisha-movies__title">Репертуар кинотеатра</h2>
+          <p class="afisha-movies__count" id="afisha-movies-count">Найдено фильмов: 8 из 8</p>
+        </div>
+
+        <div class="alert alert-warning" id="afisha-empty-message" hidden>
+          По выбранным параметрам фильмы не найдены. Попробуйте сбросить часть фильтров.
+        </div>
+
+        <div class="movies-grid">
+          <!-- Фильм 1 -->
+          <article class="movie-card movie-card--premiere js-afisha-card" data-genre="scifi" data-age="16+" data-badge="Премьера">
+            <div class="movie-card__poster-wrap">
+              <img class="movie-card__image" src="images/movie-1.jpg" alt="Постер фильма Дюна: Хроники Арракиса" width="600" height="850" loading="lazy">
+              <span class="movie-card__badge movie-card__badge--premiere badge">Премьера</span>
+              <span class="movie-card__age">16+</span>
+            </div>
+            <div class="movie-card__meta">
+              <span class="movie-card__genre">Фантастика</span>
+              <span>Зал 1 IMAX</span>
+            </div>
+            <h3 class="movie-card__title">Дюна: Хроники Арракиса</h3>
+            <p class="movie-card__description">Масштабная космическая сага о борьбе за пустынную планету и пряность.</p>
+            <p class="movie-card__price">Цена билета: 550 руб.</p>
+            <div class="movie-card__actions">
+              <a class="button button--primary movie-card__button" href="booking.html?movie=dune">Купить билет</a>
+            </div>
+          </article>
+
+          <!-- Фильм 2 -->
+          <article class="movie-card movie-card--hit js-afisha-card" data-genre="action" data-age="18+" data-badge="Хит">
+            <div class="movie-card__poster-wrap">
+              <img class="movie-card__image" src="images/movie-2.jpg" alt="Постер фильма Ночной рубеж: Токио" width="600" height="850" loading="lazy">
+              <span class="movie-card__badge movie-card__badge--hit badge">Хит</span>
+              <span class="movie-card__age">18+</span>
+            </div>
+            <div class="movie-card__meta">
+              <span class="movie-card__genre">Боевик</span>
+              <span>Зал 2 Atmos</span>
+            </div>
+            <h3 class="movie-card__title">Ночной рубеж: Токио</h3>
+            <p class="movie-card__description">Динамичный неоновый экшен о погонях по ночным магистралям мегаполиса.</p>
+            <p class="movie-card__price">Цена билета: 480 руб.</p>
+            <div class="movie-card__actions">
+              <a class="button button--primary movie-card__button" href="booking.html?movie=tokyo">Купить билет</a>
+            </div>
+          </article>
+
+          <!-- Фильм 3 -->
+          <article class="movie-card movie-card--premiere js-afisha-card" data-genre="animation" data-age="6+" data-badge="Премьера">
+            <div class="movie-card__poster-wrap">
+              <img class="movie-card__image" src="images/movie-3.jpg" alt="Постер мультфильма Хранители звёздного леса" width="600" height="850" loading="lazy">
+              <span class="movie-card__badge movie-card__badge--premiere badge">Премьера</span>
+              <span class="movie-card__age">6+</span>
+            </div>
+            <div class="movie-card__meta">
+              <span class="movie-card__genre">Анимация</span>
+              <span>Зал 4 Семейный</span>
+            </div>
+            <h3 class="movie-card__title">Хранители звёздного леса</h3>
+            <p class="movie-card__description">Красочное анимационное приключение о дружбе и магии древней природы.</p>
+            <p class="movie-card__price">Цена билета: 390 руб.</p>
+            <div class="movie-card__actions">
+              <a class="button button--primary movie-card__button" href="booking.html?movie=forest">Купить билет</a>
+            </div>
+          </article>
+
+          <!-- Фильм 4 -->
+          <article class="movie-card movie-card--hit js-afisha-card" data-genre="scifi" data-age="12+" data-badge="Хит">
+            <div class="movie-card__poster-wrap">
+              <img class="movie-card__image" src="images/movie-4.jpg" alt="Постер фильма Горизонт событий" width="600" height="850" loading="lazy">
+              <span class="movie-card__badge movie-card__badge--hit badge">Хит</span>
+              <span class="movie-card__age">12+</span>
+            </div>
+            <div class="movie-card__meta">
+              <span class="movie-card__genre">Фантастика</span>
+              <span>Зал 1 IMAX</span>
+            </div>
+            <h3 class="movie-card__title">Горизонт событий</h3>
+            <p class="movie-card__description">Межзвёздный корабль исследует гравитационную аномалию у далёкой звезды.</p>
+            <p class="movie-card__price">Цена билета: 520 руб.</p>
+            <div class="movie-card__actions">
+              <a class="button button--primary movie-card__button" href="booking.html?movie=horizon">Купить билет</a>
+            </div>
+          </article>
+
+          <!-- Фильм 5 -->
+          <article class="movie-card movie-card--premiere js-afisha-card" data-genre="thriller" data-age="12+" data-badge="Премьера">
+            <div class="movie-card__poster-wrap">
+              <img class="movie-card__image" src="images/movie-5.jpg" alt="Постер фильма Тайна старого маяка" width="600" height="850" loading="lazy">
+              <span class="movie-card__badge movie-card__badge--premiere badge">Премьера</span>
+              <span class="movie-card__age">12+</span>
+            </div>
+            <div class="movie-card__meta">
+              <span class="movie-card__genre">Триллер</span>
+              <span>Зал 3 Комфорт</span>
+            </div>
+            <h3 class="movie-card__title">Тайна старого маяка</h3>
+            <p class="movie-card__description">Детективный триллер о загадочных сигналах на туманном скалистом острове.</p>
+            <p class="movie-card__price">Цена билета: 440 руб.</p>
+            <div class="movie-card__actions">
+              <a class="button button--primary movie-card__button" href="booking.html?movie=lighthouse">Купить билет</a>
+            </div>
+          </article>
+
+          <!-- Фильм 6 -->
+          <article class="movie-card movie-card--hit js-afisha-card" data-genre="drama" data-age="16+" data-badge="Хит">
+            <div class="movie-card__poster-wrap">
+              <img class="movie-card__image" src="images/movie-6.jpg" alt="Постер фильма Последний симфонический концерт" width="600" height="850" loading="lazy">
+              <span class="movie-card__badge movie-card__badge--hit badge">Хит</span>
+              <span class="movie-card__age">16+</span>
+            </div>
+            <div class="movie-card__meta">
+              <span class="movie-card__genre">Драма</span>
+              <span>Зал 5 VIP</span>
+            </div>
+            <h3 class="movie-card__title">Последний симфонический концерт</h3>
+            <p class="movie-card__description">Вдохновляющая музыкальная драма о дирижёре, готовящем главную премьеру жизни.</p>
+            <p class="movie-card__price">Цена билета: 650 руб.</p>
+            <div class="movie-card__actions">
+              <a class="button button--primary movie-card__button" href="booking.html?movie=symphony">Купить билет</a>
+            </div>
+          </article>
+
+          <!-- Фильм 7 -->
+          <article class="movie-card movie-card--soon js-afisha-card" data-genre="animation" data-age="6+" data-badge="Скоро">
+            <div class="movie-card__poster-wrap">
+              <img class="movie-card__image" src="images/movie-7.jpg" alt="Постер мультфильма Марсианский экспресс 2099" width="600" height="850" loading="lazy">
+              <span class="movie-card__badge movie-card__badge--soon badge">Скоро</span>
+              <span class="movie-card__age">6+</span>
+            </div>
+            <div class="movie-card__meta">
+              <span class="movie-card__genre">Анимация</span>
+              <span>Предпродажа</span>
+            </div>
+            <h3 class="movie-card__title">Марсианский экспресс 2099</h3>
+            <p class="movie-card__description">Весёлое космическое путешествие юных кадетов на первом межпланетном поезде.</p>
+            <p class="movie-card__price">Цена билета: 410 руб.</p>
+            <div class="movie-card__actions">
+              <a class="button button--secondary movie-card__button" href="booking.html?movie=mars">Предзаказ билета</a>
+            </div>
+          </article>
+
+          <!-- Фильм 8 -->
+          <article class="movie-card movie-card--soon js-afisha-card" data-genre="thriller" data-age="18+" data-badge="Скоро">
+            <div class="movie-card__poster-wrap">
+              <img class="movie-card__image" src="images/movie-8.jpg" alt="Постер фильма Тень над Северным морем" width="600" height="850" loading="lazy">
+              <span class="movie-card__badge movie-card__badge--soon badge">Скоро</span>
+              <span class="movie-card__age">18+</span>
+            </div>
+            <div class="movie-card__meta">
+              <span class="movie-card__genre">Триллер</span>
+              <span>Предпродажа</span>
+            </div>
+            <h3 class="movie-card__title">Тень над Северным морем</h3>
+            <p class="movie-card__description">Напряжённый скандинавский триллер о спасательной операции на полярной станции.</p>
+            <p class="movie-card__price">Цена билета: 500 руб.</p>
+            <div class="movie-card__actions">
+              <a class="button button--secondary movie-card__button" href="booking.html?movie=shadow">Предзаказ билета</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <p class="site-footer__text"><strong>&copy; 2026 Кинотеатр «KinoAfisha».</strong> Учебный проект.</p>
+        <p class="site-footer__text">Автор: Крапчатов Г.П., группа ЭФБО-11-25</p>
+      </div>
+      <div>
+        <p class="site-footer__text">г. Москва, пр-т Вернадского, д. 78 &bull; Ежедневно с 09:00 до 02:00</p>
+        <p class="site-footer__text">Телефон кассы: +7 (495) 777-24-00</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="button button--primary scroll-top" type="button" id="scroll-top" hidden aria-label="Наверх">
+    Наверх &uarr;
+  </button>
+</body>
+</html>
