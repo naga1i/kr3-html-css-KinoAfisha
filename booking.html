@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Бронирование билетов в кинотеатре KinoAfisha — выбор фильма, даты, сеанса, интерактивная схема зала и таблица цен.">
+  <title>Бронирование — Кинотеатр KinoAfisha</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body class="page">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-header__logo" href="index.html">
+        KinoAfisha
+        <span class="site-header__logo-badge">IMAX</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Основная навигация">
+        <ul class="site-nav__list">
+          <li class="site-nav__item"><a class="site-nav__link" href="index.html">Главная</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="afisha.html">Афиша</a></li>
+          <li class="site-nav__item"><a class="site-nav__link site-nav__link--active" href="booking.html">Бронирование</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="contacts.html">Контакты</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="index.html#advantages">Преимущества</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="index.html#now-playing">Сейчас в кино</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page__main">
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a class="breadcrumbs__link" href="index.html">Главная</a>
+      <span class="breadcrumbs__current">Бронирование</span>
+    </nav>
+
+    <div class="success-message alert alert-success" id="booking-success-alert" role="status" hidden>
+      <strong>Ваши билеты успешно забронированы!</strong> Номер заказа <strong>#KA-2026-481</strong>. QR-билеты отправлены на вашу электронную почту и по SMS.
+    </div>
+
+    <section class="section">
+      <h1 class="section__title">Бронирование билетов</h1>
+      <p class="section__text">
+        Выберите фильм, удобную дату и время сеанса, отметьте понравившиеся места на схеме зала и подтвердите заказ.
+        Поля, отмеченные <span class="booking-form__required" aria-hidden="true">*</span>, обязательны для заполнения.
+      </p>
+    </section>
+
+    <form id="booking-page-form" action="#" method="post" novalidate>
+      <input type="hidden" id="booking-selected-seats" name="selected_seats" value="Ряд 3, Место 4; Ряд 3, Место 5">
+
+      <section class="booking-layout">
+        <!-- Левая колонка: форма параметров сеанса и контактов -->
+        <div class="booking-form-column">
+          <fieldset class="booking-form__fieldset">
+            <legend class="booking-form__legend">1. Параметры сеанса и билетов</legend>
+
+            <div class="booking-form__field">
+              <label class="booking-form__label" for="booking-movie">
+                Выбор фильма <span class="booking-form__required" aria-hidden="true">*</span>
+              </label>
+              <select class="booking-form__select form-select" id="booking-movie" name="movie" required>
+                <option value="Дюна: Хроники Арракиса">Дюна: Хроники Арракиса (16+, IMAX)</option>
+                <option value="Ночной рубеж: Токио">Ночной рубеж: Токио (18+, Dolby Atmos)</option>
+                <option value="Хранители звёздного леса">Хранители звёздного леса (6+, 3D)</option>
+                <option value="Горизонт событий">Горизонт событий (12+, IMAX)</option>
+                <option value="Тайна старого маяка">Тайна старого маяка (12+, 2D)</option>
+                <option value="Последний симфонический концерт">Последний симфонический концерт (16+, VIP)</option>
+                <option value="Марсианский экспресс 2099">Марсианский экспресс 2099 (6+, Предпродажа)</option>
+                <option value="Тень над Северным морем">Тень над Северным морем (18+, Предпродажа)</option>
+              </select>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="booking-form__field">
+                  <label class="booking-form__label" for="booking-date">
+                    Дата сеанса <span class="booking-form__required" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    class="booking-form__input form-control"
+                    id="booking-date"
+                    name="date"
+                    type="date"
+                    value="2026-11-05"
+                    required
+                  >
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="booking-form__field">
+                  <label class="booking-form__label" for="booking-session">
+                    Время сеанса <span class="booking-form__required" aria-hidden="true">*</span>
+                  </label>
+                  <select class="booking-form__select form-select" id="booking-session" name="session" required>
+                    <option value="10:30">10:30 (Утренний)</option>
+                    <option value="14:00">14:00 (Дневной)</option>
+                    <option value="17:30">17:30 (Дневной)</option>
+                    <option value="20:00" selected>20:00 (Вечерний IMAX)</option>
+                    <option value="23:10">23:10 (Ночной показ)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-sm-5">
+                <div class="booking-form__field mb-0">
+                  <label class="booking-form__label" for="booking-tickets-count">
+                    Количество билетов <span class="booking-form__required" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    class="booking-form__input form-control"
+                    id="booking-tickets-count"
+                    name="tickets_count"
+                    type="number"
+                    min="1"
+                    max="10"
+                    value="2"
+                    aria-describedby="tickets-count-hint"
+                    required
+                  >
+                  <small class="booking-form__hint" id="tickets-count-hint">От 1 до 10 билетов.</small>
+                </div>
+              </div>
+
+              <div class="col-sm-7">
+                <div class="booking-form__field mb-0">
+                  <label class="booking-form__label" for="booking-seat-type">
+                    Тип места / тариф <span class="booking-form__required" aria-hidden="true">*</span>
+                  </label>
+                  <select class="booking-form__select form-select" id="booking-seat-type" name="seat_type" required>
+                    <option value="standard" selected>Обычный (Стандарт) — 450 руб.</option>
+                    <option value="vip">VIP (Реклайнер, 5 ряд) — 850 руб.</option>
+                    <option value="child">Детский (до 12 лет) — 300 руб.</option>
+                    <option value="student">Студенческий — 350 руб.</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="booking-form__fieldset mb-0">
+            <legend class="booking-form__legend">2. Контактные данные покупателя</legend>
+
+            <div class="booking-form__field">
+              <label class="booking-form__label" for="booking-name">
+                Имя и фамилия <span class="booking-form__required" aria-hidden="true">*</span>
+              </label>
+              <input
+                class="booking-form__input form-control"
+                id="booking-name"
+                name="customer_name"
+                type="text"
+                minlength="2"
+                placeholder="Иван Петров"
+                autocomplete="name"
+                required
+              >
+            </div>
+
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="booking-form__field">
+                  <label class="booking-form__label" for="booking-phone">
+                    Телефон <span class="booking-form__required" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    class="booking-form__input form-control"
+                    id="booking-phone"
+                    name="customer_phone"
+                    type="tel"
+                    inputmode="tel"
+                    placeholder="+7 (900) 000-00-00"
+                    autocomplete="tel"
+                    required
+                  >
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="booking-form__field">
+                  <label class="booking-form__label" for="booking-email">
+                    E-mail для билета <span class="booking-form__required" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    class="booking-form__input form-control"
+                    id="booking-email"
+                    name="customer_email"
+                    type="email"
+                    placeholder="ticket@example.ru"
+                    autocomplete="email"
+                    required
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="booking-form__field booking-form__field--checkbox mb-0">
+              <label class="booking-form__label" for="booking-agreement">
+                <input class="form-check-input mt-0" id="booking-agreement" name="agreement" type="checkbox" required checked>
+                <span>Я согласен с правилами покупки и возврата электронных билетов <span class="booking-form__required" aria-hidden="true">*</span></span>
+              </label>
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- Правая колонка: интерактивная схема зала и итоговая стоимость -->
+        <div class="booking-hall-column">
+          <div class="hall-card">
+            <h2 class="h5 fw-bold mb-3 text-center">3. Схема зала №1 (IMAX Laser) — выберите места</h2>
+            <div class="hall-screen" aria-hidden="true">Экран IMAX 24 м</div>
+
+            <div class="hall-grid" id="hall-grid" role="group" aria-label="Схема мест кинозала">
+              <!-- Ряд 1 -->
+              <div class="hall-row">
+                <span class="hall-row__label">Ряд 1</span>
+                <button class="seat" type="button" data-row="1" data-seat="1" data-seat-type="standard" aria-label="Ряд 1 Место 1">1</button>
+                <button class="seat" type="button" data-row="1" data-seat="2" data-seat-type="standard" aria-label="Ряд 1 Место 2">2</button>
+                <button class="seat seat--occupied" type="button" data-row="1" data-seat="3" disabled aria-label="Ряд 1 Место 3 занято">3</button>
+                <button class="seat seat--occupied" type="button" data-row="1" data-seat="4" disabled aria-label="Ряд 1 Место 4 занято">4</button>
+                <button class="seat" type="button" data-row="1" data-seat="5" data-seat-type="standard" aria-label="Ряд 1 Место 5">5</button>
+                <button class="seat" type="button" data-row="1" data-seat="6" data-seat-type="standard" aria-label="Ряд 1 Место 6">6</button>
+                <button class="seat" type="button" data-row="1" data-seat="7" data-seat-type="standard" aria-label="Ряд 1 Место 7">7</button>
+                <button class="seat" type="button" data-row="1" data-seat="8" data-seat-type="standard" aria-label="Ряд 1 Место 8">8</button>
+              </div>
+
+              <!-- Ряд 2 -->
+              <div class="hall-row">
+                <span class="hall-row__label">Ряд 2</span>
+                <button class="seat" type="button" data-row="2" data-seat="1" data-seat-type="standard" aria-label="Ряд 2 Место 1">1</button>
+                <button class="seat" type="button" data-row="2" data-seat="2" data-seat-type="standard" aria-label="Ряд 2 Место 2">2</button>
+                <button class="seat" type="button" data-row="2" data-seat="3" data-seat-type="standard" aria-label="Ряд 2 Место 3">3</button>
+                <button class="seat" type="button" data-row="2" data-seat="4" data-seat-type="standard" aria-label="Ряд 2 Место 4">4</button>
+                <button class="seat seat--occupied" type="button" data-row="2" data-seat="5" disabled aria-label="Ряд 2 Место 5 занято">5</button>
+                <button class="seat seat--occupied" type="button" data-row="2" data-seat="6" disabled aria-label="Ряд 2 Место 6 занято">6</button>
+                <button class="seat" type="button" data-row="2" data-seat="7" data-seat-type="standard" aria-label="Ряд 2 Место 7">7</button>
+                <button class="seat" type="button" data-row="2" data-seat="8" data-seat-type="standard" aria-label="Ряд 2 Место 8">8</button>
+              </div>
+
+              <!-- Ряд 3 (по умолчанию выбраны места 4 и 5) -->
+              <div class="hall-row">
+                <span class="hall-row__label">Ряд 3</span>
+                <button class="seat" type="button" data-row="3" data-seat="1" data-seat-type="standard" aria-label="Ряд 3 Место 1">1</button>
+                <button class="seat" type="button" data-row="3" data-seat="2" data-seat-type="standard" aria-label="Ряд 3 Место 2">2</button>
+                <button class="seat" type="button" data-row="3" data-seat="3" data-seat-type="standard" aria-label="Ряд 3 Место 3">3</button>
+                <button class="seat seat--selected" type="button" data-row="3" data-seat="4" data-seat-type="standard" aria-pressed="true" aria-label="Ряд 3 Место 4 выбрано">4</button>
+                <button class="seat seat--selected" type="button" data-row="3" data-seat="5" data-seat-type="standard" aria-pressed="true" aria-label="Ряд 3 Место 5 выбрано">5</button>
+                <button class="seat" type="button" data-row="3" data-seat="6" data-seat-type="standard" aria-label="Ряд 3 Место 6">6</button>
+                <button class="seat" type="button" data-row="3" data-seat="7" data-seat-type="standard" aria-label="Ряд 3 Место 7">7</button>
+                <button class="seat" type="button" data-row="3" data-seat="8" data-seat-type="standard" aria-label="Ряд 3 Место 8">8</button>
+              </div>
+
+              <!-- Ряд 4 -->
+              <div class="hall-row">
+                <span class="hall-row__label">Ряд 4</span>
+                <button class="seat" type="button" data-row="4" data-seat="1" data-seat-type="standard" aria-label="Ряд 4 Место 1">1</button>
+                <button class="seat seat--occupied" type="button" data-row="4" data-seat="2" disabled aria-label="Ряд 4 Место 2 занято">2</button>
+                <button class="seat seat--occupied" type="button" data-row="4" data-seat="3" disabled aria-label="Ряд 4 Место 3 занято">3</button>
+                <button class="seat" type="button" data-row="4" data-seat="4" data-seat-type="standard" aria-label="Ряд 4 Место 4">4</button>
+                <button class="seat" type="button" data-row="4" data-seat="5" data-seat-type="standard" aria-label="Ряд 4 Место 5">5</button>
+                <button class="seat" type="button" data-row="4" data-seat="6" data-seat-type="standard" aria-label="Ряд 4 Место 6">6</button>
+                <button class="seat seat--occupied" type="button" data-row="4" data-seat="7" disabled aria-label="Ряд 4 Место 7 занято">7</button>
+                <button class="seat" type="button" data-row="4" data-seat="8" data-seat-type="standard" aria-label="Ряд 4 Место 8">8</button>
+              </div>
+
+              <!-- Ряд 5 VIP -->
+              <div class="hall-row">
+                <span class="hall-row__label">Ряд 5 VIP</span>
+                <button class="seat seat--vip" type="button" data-row="5" data-seat="1" data-seat-type="vip" aria-label="Ряд 5 VIP Место 1">1</button>
+                <button class="seat seat--vip" type="button" data-row="5" data-seat="2" data-seat-type="vip" aria-label="Ряд 5 VIP Место 2">2</button>
+                <button class="seat seat--vip seat--occupied" type="button" data-row="5" data-seat="3" disabled aria-label="Ряд 5 VIP Место 3 занято">3</button>
+                <button class="seat seat--vip" type="button" data-row="5" data-seat="4" data-seat-type="vip" aria-label="Ряд 5 VIP Место 4">4</button>
+                <button class="seat seat--vip" type="button" data-row="5" data-seat="5" data-seat-type="vip" aria-label="Ряд 5 VIP Место 5">5</button>
+                <button class="seat seat--vip" type="button" data-row="5" data-seat="6" data-seat-type="vip" aria-label="Ряд 5 VIP Место 6">6</button>
+                <button class="seat seat--vip" type="button" data-row="5" data-seat="7" data-seat-type="vip" aria-label="Ряд 5 VIP Место 7">7</button>
+                <button class="seat seat--vip" type="button" data-row="5" data-seat="8" data-seat-type="vip" aria-label="Ряд 5 VIP Место 8">8</button>
+              </div>
+            </div>
+
+            <div class="hall-legend">
+              <span class="hall-legend__item">
+                <span class="hall-legend__swatch hall-legend__swatch--free" aria-hidden="true"></span>
+                Свободные
+              </span>
+              <span class="hall-legend__item">
+                <span class="hall-legend__swatch hall-legend__swatch--vip" aria-hidden="true"></span>
+                Свободные VIP
+              </span>
+              <span class="hall-legend__item">
+                <span class="hall-legend__swatch hall-legend__swatch--selected" aria-hidden="true"></span>
+                Выбранные
+              </span>
+              <span class="hall-legend__item">
+                <span class="hall-legend__swatch hall-legend__swatch--occupied" aria-hidden="true"></span>
+                Занятые
+              </span>
+            </div>
+          </div>
+
+          <!-- Итоговая стоимость заказа -->
+          <div class="order-summary">
+            <h2 class="order-summary__title">Ваш заказ</h2>
+            <ul class="order-summary__list">
+              <li class="order-summary__item">
+                <span>Фильм:</span>
+                <strong id="summary-movie">Дюна: Хроники Арракиса</strong>
+              </li>
+              <li class="order-summary__item">
+                <span>Дата и сеанс:</span>
+                <strong id="summary-session">2026-11-05, 20:00</strong>
+              </li>
+              <li class="order-summary__item">
+                <span>Категория билета:</span>
+                <strong id="summary-tariff">Обычный (Стандарт) (450 руб.)</strong>
+              </li>
+              <li class="order-summary__item">
+                <span>Выбранные места:</span>
+                <strong id="summary-seats">Ряд 3, Место 4, Ряд 3, Место 5 (2 шт.)</strong>
+              </li>
+            </ul>
+
+            <div class="order-summary__total">
+              <span>Итоговая стоимость:</span>
+              <span id="summary-total-price">900 руб.</span>
+            </div>
+
+            <div class="booking-form__actions mt-3">
+              <button class="button button--primary btn-lg flex-grow-1" type="submit">
+                Забронировать
+              </button>
+              <button class="button button--secondary" type="reset">
+                Сбросить выбор
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </form>
+
+    <!-- Таблица цен на билеты -->
+    <section class="section" id="price-table-section">
+      <h2 class="section__title">Таблица цен на билеты</h2>
+      <p class="section__text">
+        Стоимость билетов зависит от выбранной категории места, времени сеанса и действующих льгот.
+      </p>
+
+      <div class="table-wrapper">
+        <table class="price-table table mb-0">
+          <caption class="price-table__caption">Тарифы кинотеатра «KinoAfisha» на 2026 год</caption>
+          <thead>
+            <tr>
+              <th class="price-table__cell price-table__cell--head" scope="col">Тип билета</th>
+              <th class="price-table__cell price-table__cell--head" scope="col">Описание категории и мест</th>
+              <th class="price-table__cell price-table__cell--head" scope="col">Утренние (до 13:00)</th>
+              <th class="price-table__cell price-table__cell--head" scope="col">Дневные (13:00–18:00)</th>
+              <th class="price-table__cell price-table__cell--head" scope="col">Вечерние / Базовый тариф</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="price-table__cell price-table__cell--head" scope="row">Обычный</th>
+              <td class="price-table__cell">Стандартные эргономичные кресла (ряды 1–4) с подстаканниками</td>
+              <td class="price-table__cell">350 руб.</td>
+              <td class="price-table__cell">400 руб.</td>
+              <td class="price-table__cell"><strong>450 руб.</strong></td>
+            </tr>
+            <tr>
+              <th class="price-table__cell price-table__cell--head" scope="row">VIP</th>
+              <td class="price-table__cell">Кожаные кресла-реклайнеры с электроприводом и столиком (ряд 5 VIP)</td>
+              <td class="price-table__cell">700 руб.</td>
+              <td class="price-table__cell">780 руб.</td>
+              <td class="price-table__cell"><strong>850 руб.</strong></td>
+            </tr>
+            <tr>
+              <th class="price-table__cell price-table__cell--head" scope="row">Детский</th>
+              <td class="price-table__cell">Для зрителей до 12 лет включительно на сеансы 0+, 6+ и 12+</td>
+              <td class="price-table__cell">240 руб.</td>
+              <td class="price-table__cell">270 руб.</td>
+              <td class="price-table__cell"><strong>300 руб.</strong></td>
+            </tr>
+            <tr>
+              <th class="price-table__cell price-table__cell--head" scope="row">Студенческий</th>
+              <td class="price-table__cell">По предъявлению действующего студенческого билета в кассе или на контроле</td>
+              <td class="price-table__cell">290 руб.</td>
+              <td class="price-table__cell">320 руб.</td>
+              <td class="price-table__cell"><strong>350 руб.</strong></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="price-table__cell price-table__footer" colspan="5">
+                Все цены указаны в рублях с учётом НДС. При онлайн-бронировании на сайте комиссия не взимается.
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <p class="site-footer__text"><strong>&copy; 2026 Кинотеатр «KinoAfisha».</strong> Учебный проект.</p>
+        <p class="site-footer__text">Автор: Крапчатов Г.П., группа ЭФБО-11-25</p>
+      </div>
+      <div>
+        <p class="site-footer__text">г. Москва, пр-т Вернадского, д. 78 &bull; Ежедневно с 09:00 до 02:00</p>
+        <p class="site-footer__text">Телефон кассы: +7 (495) 777-24-00</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="button button--primary scroll-top" type="button" id="scroll-top" hidden aria-label="Наверх">
+    Наверх &uarr;
+  </button>
+</body>
+</html>
