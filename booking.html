@@ -55,7 +55,7 @@
         <!-- Левая колонка: форма параметров сеанса и контактов -->
         <div class="booking-form-column">
           <fieldset class="booking-form__fieldset">
-            <legend class="booking-form__legend">1. Параметры сеанса и билетов</legend>
+            <legend class="booking-form__legend">1. Параметры сеанса</legend>
 
             <div class="booking-form__field">
               <label class="booking-form__label" for="booking-movie">
@@ -76,7 +76,7 @@
 
             <div class="row g-3">
               <div class="col-sm-6">
-                <div class="booking-form__field">
+                <div class="booking-form__field mb-0">
                   <label class="booking-form__label" for="booking-date">
                     Дата сеанса <span class="booking-form__required" aria-hidden="true">*</span>
                   </label>
@@ -92,7 +92,7 @@
               </div>
 
               <div class="col-sm-6">
-                <div class="booking-form__field">
+                <div class="booking-form__field mb-0">
                   <label class="booking-form__label" for="booking-session">
                     Время сеанса <span class="booking-form__required" aria-hidden="true">*</span>
                   </label>
@@ -102,42 +102,6 @@
                     <option value="17:30">17:30 (Дневной)</option>
                     <option value="20:00" selected>20:00 (Вечерний сеанс)</option>
                     <option value="23:10">23:10 (Ночной показ)</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="row g-3">
-              <div class="col-sm-5">
-                <div class="booking-form__field mb-0">
-                  <label class="booking-form__label" for="booking-tickets-count">
-                    Количество билетов <span class="booking-form__required" aria-hidden="true">*</span>
-                  </label>
-                  <input
-                    class="booking-form__input form-control"
-                    id="booking-tickets-count"
-                    name="tickets_count"
-                    type="number"
-                    min="1"
-                    max="10"
-                    value="2"
-                    aria-describedby="tickets-count-hint"
-                    required
-                  >
-                  <small class="booking-form__hint" id="tickets-count-hint">От 1 до 10 билетов.</small>
-                </div>
-              </div>
-
-              <div class="col-sm-7">
-                <div class="booking-form__field mb-0">
-                  <label class="booking-form__label" for="booking-seat-type">
-                    Тип места / тариф <span class="booking-form__required" aria-hidden="true">*</span>
-                  </label>
-                  <select class="booking-form__select form-select" id="booking-seat-type" name="seat_type" required>
-                    <option value="standard" selected>Обычный (Стандарт) — 450 руб.</option>
-                    <option value="vip">VIP (Реклайнер) — 850 руб.</option>
-                    <option value="child">Детский (до 12 лет) — 300 руб.</option>
-                    <option value="student">Студенческий — 350 руб.</option>
                   </select>
                 </div>
               </div>
@@ -225,11 +189,11 @@
             <div class="hall-legend">
               <span class="hall-legend__item">
                 <span class="hall-legend__swatch hall-legend__swatch--free" aria-hidden="true"></span>
-                Свободные
+                Свободные (450 руб.)
               </span>
               <span class="hall-legend__item">
                 <span class="hall-legend__swatch hall-legend__swatch--vip" aria-hidden="true"></span>
-                Свободные VIP
+                Свободные VIP (850 руб.)
               </span>
               <span class="hall-legend__item">
                 <span class="hall-legend__swatch hall-legend__swatch--selected" aria-hidden="true"></span>
@@ -259,19 +223,19 @@
                 <strong id="summary-session">2026-11-05, 20:00</strong>
               </li>
               <li class="order-summary__item">
-                <span>Категория билета:</span>
-                <strong id="summary-tariff">Обычный (Стандарт) (450 руб.)</strong>
-              </li>
-              <li class="order-summary__item">
                 <span>Выбранные места:</span>
-                <strong id="summary-seats">Ряд 3, Место 4, Ряд 3, Место 5 (2 шт.)</strong>
+                <strong id="summary-seats">Места не выбраны</strong>
               </li>
             </ul>
 
             <div class="order-summary__total">
               <span>Итоговая стоимость:</span>
-              <span id="summary-total-price">900 руб.</span>
+              <span id="summary-total-price">0 руб.</span>
             </div>
+
+            <p class="text-danger small mb-2" id="booking-seat-error" hidden>
+              Пожалуйста, выберите хотя бы одно место на схеме зала.
+            </p>
 
             <div class="booking-form__actions mt-3">
               <button class="button button--primary btn-lg flex-grow-1" type="submit">

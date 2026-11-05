@@ -196,15 +196,6 @@ if (bookingPageForm && hallGrid) {
   const ticketPrices = {
     standard: 450,
     vip: 850,
-    child: 300,
-    student: 350,
-  };
-
-  const ticketTypeNames = {
-    standard: 'Обычный (Стандарт)',
-    vip: 'VIP (Реклайнер)',
-    child: 'Детский (до 12 лет)',
-    student: 'Студенческий',
   };
 
   // Индивидуальные конфигурации залов для каждого фильма
@@ -216,7 +207,6 @@ if (bookingPageForm && hallGrid) {
       seatsPerRow: 9,
       vipRows: [5],
       occupied: ['1-4', '1-5', '2-5', '2-6', '3-2', '3-3', '4-7', '4-8', '5-5'],
-      defaultSelected: ['3-5', '3-6'],
     },
     'Битва моторов': {
       hallName: 'Зал №2 (Dolby Atmos)',
@@ -225,7 +215,6 @@ if (bookingPageForm && hallGrid) {
       seatsPerRow: 8,
       vipRows: [5],
       occupied: ['1-1', '1-2', '2-3', '2-4', '3-6', '3-7', '4-2', '5-3', '5-4'],
-      defaultSelected: ['3-4', '3-5'],
     },
     'Барашек Шон и Чудище Лохматое': {
       hallName: 'Зал №3 (Семейный 3D)',
@@ -234,7 +223,6 @@ if (bookingPageForm && hallGrid) {
       seatsPerRow: 7,
       vipRows: [4],
       occupied: ['1-3', '1-4', '2-2', '2-5', '2-6', '3-1'],
-      defaultSelected: ['2-3', '2-4'],
     },
     'Чудо-Юдо': {
       hallName: 'Зал №4 (Комфорт)',
@@ -243,7 +231,6 @@ if (bookingPageForm && hallGrid) {
       seatsPerRow: 8,
       vipRows: [4, 5],
       occupied: ['1-5', '2-1', '2-2', '3-3', '3-4', '4-6', '4-7', '5-2'],
-      defaultSelected: ['3-5', '3-6'],
     },
     'Большие гонки. Пегас III': {
       hallName: 'Зал №5 (Драйв Motion)',
@@ -252,7 +239,6 @@ if (bookingPageForm && hallGrid) {
       seatsPerRow: 8,
       vipRows: [4],
       occupied: ['1-4', '1-5', '2-6', '2-7', '3-2', '3-3', '4-4', '4-5'],
-      defaultSelected: ['2-4', '2-5'],
     },
     'Зверь': {
       hallName: 'Зал №6 (VIP Lounge)',
@@ -261,7 +247,6 @@ if (bookingPageForm && hallGrid) {
       seatsPerRow: 6,
       vipRows: [1, 2, 3, 4],
       occupied: ['1-2', '1-3', '2-5', '3-1', '3-2', '4-4'],
-      defaultSelected: ['2-3', '2-4'],
     },
     'Голодные игры: Рассвет жатвы': {
       hallName: 'Зал №1 (IMAX Laser • Предпродажа)',
@@ -270,7 +255,6 @@ if (bookingPageForm && hallGrid) {
       seatsPerRow: 9,
       vipRows: [5],
       occupied: ['2-4', '2-5', '3-4', '3-5', '3-6', '4-5', '5-4', '5-5'],
-      defaultSelected: ['4-3', '4-4'],
     },
     'Чебурашка 3': {
       hallName: 'Зал №3 (Семейный • Предпродажа)',
@@ -279,15 +263,12 @@ if (bookingPageForm && hallGrid) {
       seatsPerRow: 7,
       vipRows: [4],
       occupied: ['1-2', '1-3', '2-4', '2-5', '3-2', '3-3', '4-4'],
-      defaultSelected: ['3-4', '3-5'],
     },
   };
 
   const movieSelect = document.getElementById('booking-movie');
   const dateInput = document.getElementById('booking-date');
   const sessionSelect = document.getElementById('booking-session');
-  const ticketCountInput = document.getElementById('booking-tickets-count');
-  const seatTypeSelect = document.getElementById('booking-seat-type');
   const selectedSeatsInput = document.getElementById('booking-selected-seats');
 
   const hallTitleEl = document.getElementById('hall-title');
@@ -297,10 +278,10 @@ if (bookingPageForm && hallGrid) {
   const summaryMovie = document.getElementById('summary-movie');
   const summaryHall = document.getElementById('summary-hall');
   const summarySession = document.getElementById('summary-session');
-  const summaryTariff = document.getElementById('summary-tariff');
   const summarySeats = document.getElementById('summary-seats');
   const summaryTotalPrice = document.getElementById('summary-total-price');
   const bookingSuccessAlert = document.getElementById('booking-success-alert');
+  const bookingSeatError = document.getElementById('booking-seat-error');
 
   // Подставляем фильм из URL-параметра ?movie=...
   const urlMovieParam = new URLSearchParams(window.location.search).get('movie');
@@ -353,7 +334,6 @@ if (bookingPageForm && hallGrid) {
       for (let s = 1; s <= config.seatsPerRow; s += 1) {
         const seatKey = `${r}-${s}`;
         const isOccupied = config.occupied.includes(seatKey);
-        const isSelected = config.defaultSelected.includes(seatKey) && !isOccupied;
 
         const btn = document.createElement('button');
         btn.type = 'button';
@@ -364,9 +344,6 @@ if (bookingPageForm && hallGrid) {
         if (isOccupied) {
           btn.classList.add('seat--occupied');
           btn.disabled = true;
-        } else if (isSelected) {
-          btn.classList.add('seat--selected');
-          btn.setAttribute('aria-pressed', 'true');
         } else {
           btn.setAttribute('aria-pressed', 'false');
         }
@@ -385,19 +362,6 @@ if (bookingPageForm && hallGrid) {
 
       hallGrid.appendChild(rowEl);
     }
-
-    // Если весь зал VIP (например, Зал №6 для фильма «Зверь»), автоматически ставим VIP-тариф
-    if (seatTypeSelect) {
-      if (config.vipRows.length === config.rows) {
-        seatTypeSelect.value = 'vip';
-      } else if (seatTypeSelect.value === 'vip') {
-        seatTypeSelect.value = 'standard';
-      }
-    }
-
-    if (ticketCountInput) {
-      ticketCountInput.value = String(config.defaultSelected.length || 2);
-    }
   };
 
   const getSelectedSeatButtons = () =>
@@ -406,30 +370,17 @@ if (bookingPageForm && hallGrid) {
   const updateBookingSummary = () => {
     const config = getCurrentHallConfig();
     const selectedSeatButtons = getSelectedSeatButtons();
-    const tariffKey = seatTypeSelect ? seatTypeSelect.value : 'standard';
-    const basePrice = ticketPrices[tariffKey] || 450;
-
-    const countFromInput = Math.max(1, parseInt(ticketCountInput.value, 10) || 1);
-    const effectiveCount =
-      selectedSeatButtons.length > 0 ? selectedSeatButtons.length : countFromInput;
 
     let total = 0;
-    if (selectedSeatButtons.length > 0) {
-      selectedSeatButtons.forEach((seatBtn) => {
-        const isVipSeat = seatBtn.dataset.seatType === 'vip';
-        if (isVipSeat && tariffKey === 'standard') {
-          total += ticketPrices.vip;
-        } else {
-          total += basePrice;
-        }
-      });
-    } else {
-      total = effectiveCount * basePrice;
-    }
+    selectedSeatButtons.forEach((seatBtn) => {
+      const isVipSeat = seatBtn.dataset.seatType === 'vip';
+      total += isVipSeat ? ticketPrices.vip : ticketPrices.standard;
+    });
 
-    const seatLabels = selectedSeatButtons.map(
-      (btn) => `Ряд ${btn.dataset.row}, Место ${btn.dataset.seat}`
-    );
+    const seatLabels = selectedSeatButtons.map((btn) => {
+      const isVipSeat = btn.dataset.seatType === 'vip';
+      return `Ряд ${btn.dataset.row}, Место ${btn.dataset.seat}${isVipSeat ? ' (VIP)' : ''}`;
+    });
 
     if (selectedSeatsInput) {
       selectedSeatsInput.value = seatLabels.join('; ');
@@ -447,19 +398,19 @@ if (bookingPageForm && hallGrid) {
       summarySession.textContent = `${dateInput.value}, ${sessionSelect.value}`;
     }
 
-    if (summaryTariff) {
-      summaryTariff.textContent = `${ticketTypeNames[tariffKey]} (${basePrice} руб.)`;
-    }
-
     if (summarySeats) {
       summarySeats.textContent =
         seatLabels.length > 0
           ? `${seatLabels.join(', ')} (${seatLabels.length} шт.)`
-          : `Места не отмечены на схеме (по форме: ${countFromInput} шт.)`;
+          : 'Места не выбраны';
     }
 
     if (summaryTotalPrice) {
       summaryTotalPrice.textContent = `${total} руб.`;
+    }
+
+    if (bookingSeatError && selectedSeatButtons.length > 0) {
+      bookingSeatError.hidden = true;
     }
   };
 
@@ -482,19 +433,10 @@ if (bookingPageForm && hallGrid) {
     const isSelected = seatButton.classList.contains('seat--selected');
     seatButton.setAttribute('aria-pressed', String(isSelected));
 
-    const selectedSeats = getSelectedSeatButtons();
-    if (selectedSeats.length > 0 && ticketCountInput) {
-      ticketCountInput.value = String(selectedSeats.length);
-    }
-
-    if (isSelected && seatButton.dataset.seatType === 'vip' && seatTypeSelect.value === 'standard') {
-      seatTypeSelect.value = 'vip';
-    }
-
     updateBookingSummary();
   });
 
-  [dateInput, sessionSelect, ticketCountInput, seatTypeSelect].forEach((control) => {
+  [dateInput, sessionSelect].forEach((control) => {
     if (control) {
       control.addEventListener('change', updateBookingSummary);
       control.addEventListener('input', updateBookingSummary);
@@ -505,12 +447,23 @@ if (bookingPageForm && hallGrid) {
     setTimeout(() => {
       renderHallForCurrentMovie();
       Array.from(bookingPageForm.elements).forEach((el) => el.removeAttribute('aria-invalid'));
+      if (bookingSeatError) {
+        bookingSeatError.hidden = true;
+      }
       updateBookingSummary();
     }, 0);
   });
 
   bookingPageForm.addEventListener('submit', (event) => {
     event.preventDefault();
+
+    const selectedSeats = getSelectedSeatButtons();
+    if (selectedSeats.length === 0) {
+      if (bookingSeatError) {
+        bookingSeatError.hidden = false;
+      }
+      return;
+    }
 
     const formElements = Array.from(bookingPageForm.elements);
     formElements.forEach((el) => {
