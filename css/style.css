@@ -3,22 +3,22 @@
    =============================== */
 
 :root {
-  /* Основные цвета проекта */
-  --color-bg: #f8f9fc;
-  --color-text: #1c1f26;
-  --color-muted: #5c6474;
-  --color-primary: #d91c43;
-  --color-primary-dark: #a81231;
-  --color-accent: #1e293b;
-  --color-border: #dce1eb;
-  --color-surface: #ffffff;
-  --color-surface-alt: #f1f4f9;
-  --color-surface-accent: #fff0f3;
-  --color-danger: #c62828;
-  --color-success: #168a2f;
-  --color-success-bg: #eefaf0;
-  --color-warning: #d97706;
-  --color-vip: #7c3aed;
+  /* Основные цвета проекта — Тёмная тема «Настоящий Кинозал» */
+  --color-bg: #0f1117;
+  --color-text: #f1f5f9;
+  --color-muted: #94a3b8;
+  --color-primary: #ff5500;
+  --color-primary-dark: #e04800;
+  --color-accent: #141821;
+  --color-border: #262c3a;
+  --color-surface: #181c26;
+  --color-surface-alt: #212736;
+  --color-surface-accent: #241914;
+  --color-danger: #ef4444;
+  --color-success: #22c55e;
+  --color-success-bg: #12281c;
+  --color-warning: #f59e0b;
+  --color-vip: #a855f7;
   --color-white: #ffffff;
 
   /* Отступы */
@@ -109,7 +109,8 @@ a:focus-visible {
 .site-header {
   background-color: var(--color-accent);
   color: var(--color-white);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 .site-header__inner {
@@ -135,7 +136,7 @@ a:focus-visible {
 }
 
 .site-header__logo:hover {
-  color: #ff8fa3;
+  color: var(--color-primary);
 }
 
 .site-header__logo-badge {
@@ -225,7 +226,8 @@ a:focus-visible {
   grid-template-columns: 1.4fr 260px;
   gap: var(--space-xl);
   align-items: center;
-  background-color: #161b22;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
   color: var(--color-white);
   border-radius: var(--radius-md);
 }
@@ -497,7 +499,7 @@ a:focus-visible {
 .movie-card:hover {
   border-color: var(--color-primary);
   transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(217, 28, 67, 0.12);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
 }
 
 .movie-card--premiere {
@@ -621,9 +623,11 @@ a:focus-visible {
 .booking-dialog {
   width: min(100% - 32px, 560px);
   padding: 0;
-  border: none;
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.65);
 }
 
 .booking-dialog::backdrop {
@@ -722,7 +726,23 @@ a:focus-visible {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   font: inherit;
-  background-color: var(--color-surface);
+  color: var(--color-text);
+  background-color: var(--color-surface-alt);
+  color-scheme: dark;
+}
+
+.booking-form__input::placeholder,
+.booking-form__textarea::placeholder {
+  color: var(--color-muted);
+}
+
+.booking-form__input:focus,
+.booking-form__select:focus,
+.booking-form__textarea:focus {
+  color: var(--color-text);
+  background-color: var(--color-surface-alt);
+  border-color: var(--color-primary);
+  box-shadow: none;
 }
 
 .booking-form__input:hover,
@@ -997,9 +1017,9 @@ a:focus-visible {
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--color-muted);
-  background: linear-gradient(180deg, #cbd5e1 0%, #f1f5f9 100%);
-  border-top: 4px solid var(--color-accent);
+  color: #cbd5e1;
+  background: linear-gradient(180deg, rgba(255, 85, 0, 0.22) 0%, rgba(24, 28, 38, 0) 100%);
+  border-top: 4px solid var(--color-primary);
   border-radius: 50% 50% 0 0 / 14px 14px 0 0;
 }
 
@@ -1030,7 +1050,7 @@ a:focus-visible {
 .seat {
   width: 34px;
   height: 34px;
-  border: 1px solid #94a3b8;
+  border: 1px solid #3b4459;
   border-radius: 6px 6px 10px 10px;
   background-color: var(--color-surface-alt);
   color: var(--color-text);
@@ -1047,8 +1067,8 @@ a:focus-visible {
 
 .seat--vip {
   border-color: var(--color-vip);
-  background-color: #f3e8ff;
-  color: #5b21b6;
+  background-color: rgba(168, 85, 247, 0.18);
+  color: #e9d5ff;
 }
 
 .seat--selected {
@@ -1059,9 +1079,9 @@ a:focus-visible {
 
 .seat--occupied,
 .seat:disabled {
-  background-color: #cbd5e1;
-  border-color: #94a3b8;
-  color: #64748b;
+  background-color: #12151d;
+  border-color: #262c3a;
+  color: #475569;
   cursor: not-allowed;
   opacity: 0.65;
 }
@@ -1087,7 +1107,7 @@ a:focus-visible {
   width: 18px;
   height: 18px;
   border-radius: 4px;
-  border: 1px solid #94a3b8;
+  border: 1px solid #3b4459;
 }
 
 .hall-legend__swatch--free {
@@ -1095,7 +1115,7 @@ a:focus-visible {
 }
 
 .hall-legend__swatch--vip {
-  background-color: #f3e8ff;
+  background-color: rgba(168, 85, 247, 0.25);
   border-color: var(--color-vip);
 }
 
@@ -1105,14 +1125,16 @@ a:focus-visible {
 }
 
 .hall-legend__swatch--occupied {
-  background-color: #cbd5e1;
+  background-color: #12151d;
+  border-color: #262c3a;
 }
 
 .order-summary {
   margin-top: var(--space-lg);
   padding: var(--space-lg);
-  background-color: var(--color-surface-accent);
-  border: 1px solid #fecdd3;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
   border-radius: var(--radius-md);
 }
 
@@ -1134,7 +1156,7 @@ a:focus-visible {
   justify-content: space-between;
   gap: var(--space-sm);
   padding: 6px 0;
-  border-bottom: 1px dashed #fda4af;
+  border-bottom: 1px dashed var(--color-border);
 }
 
 .order-summary__total {
@@ -1144,7 +1166,7 @@ a:focus-visible {
   margin: var(--space-md) 0;
   font-size: 22px;
   font-weight: 800;
-  color: var(--color-primary-dark);
+  color: var(--color-primary);
 }
 
 /* ===============================
@@ -1218,6 +1240,7 @@ a:focus-visible {
   margin-top: auto;
   padding: var(--space-xl) var(--space-lg) var(--space-lg);
   background-color: var(--color-accent);
+  border-top: 1px solid var(--color-border);
   color: #cbd5e1;
 }
 
@@ -1246,7 +1269,7 @@ a:focus-visible {
 }
 
 .site-footer__logo:hover {
-  color: #ff8fa3;
+  color: var(--color-primary);
 }
 
 .site-footer__title {
