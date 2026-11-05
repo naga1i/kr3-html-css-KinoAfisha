@@ -1,4 +1,39 @@
 // ===============================
+// 0. Переключение тёмной и светлой темы
+// ===============================
+const themeToggleButton = document.getElementById('theme-toggle');
+
+const applyTheme = (theme) => {
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+
+  if (themeToggleButton) {
+    const isLight = theme === 'light';
+    themeToggleButton.textContent = isLight ? 'Тёмная тема' : 'Светлая тема';
+    themeToggleButton.setAttribute(
+      'aria-label',
+      isLight ? 'Переключить на тёмную тему' : 'Переключить на светлую тему'
+    );
+  }
+};
+
+const savedTheme = localStorage.getItem('moviemirea-theme') || 'dark';
+applyTheme(savedTheme);
+
+if (themeToggleButton) {
+  themeToggleButton.addEventListener('click', () => {
+    const currentTheme =
+      document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('moviemirea-theme', nextTheme);
+    applyTheme(nextTheme);
+  });
+}
+
+// ===============================
 // 1. Кнопка плавного возврата «Наверх»
 // ===============================
 const scrollTopButton = document.getElementById('scroll-top');
