@@ -231,22 +231,33 @@ a:focus-visible {
 .theme-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
-  font: inherit;
-  font-size: 14px;
-  font-weight: 600;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
   color: var(--color-white);
   background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: var(--radius-sm);
+  border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .theme-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.18);
+  color: var(--color-primary);
+  background-color: rgba(255, 255, 255, 0.16);
   border-color: var(--color-primary);
+  transform: rotate(12deg);
 }
 
 .theme-toggle:focus-visible {
