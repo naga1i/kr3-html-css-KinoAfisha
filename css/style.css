@@ -1216,7 +1216,7 @@ a:focus-visible {
 
 .site-footer {
   margin-top: auto;
-  padding: var(--space-lg);
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
   background-color: var(--color-accent);
   color: #cbd5e1;
 }
@@ -1224,16 +1224,74 @@ a:focus-visible {
 .site-footer__inner {
   max-width: var(--container-width);
   margin: 0 auto;
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
+  gap: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.site-footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.site-footer__logo:hover {
+  color: #ff8fa3;
+}
+
+.site-footer__title {
+  margin: 0 0 var(--space-sm);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-white);
+}
+
+.site-footer__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer__item {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.site-footer__link {
+  color: #cbd5e1;
+  text-decoration: none;
+}
+
+.site-footer__link:hover {
+  color: var(--color-white);
+  text-decoration: underline;
+}
+
+.site-footer__bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--space-md);
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
 }
 
 .site-footer__text {
   margin: 4px 0;
   font-size: 14px;
+  color: #94a3b8;
 }
 
 /* ===============================
@@ -1255,7 +1313,8 @@ a:focus-visible {
   .about-cinema,
   .booking-layout,
   .advantages-grid,
-  .hero {
+  .hero,
+  .site-footer__grid {
     grid-template-columns: 1fr;
   }
 
