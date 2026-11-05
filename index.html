@@ -6,8 +6,8 @@
   <meta name="description" content="Главная страница кинотеатра MovieMirea — расписание актуальных сеансов, залы IMAX, комфортные кресла и быстрое бронирование билетов.">
   <title>Главная — Кинотеатр MovieMirea</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=7">
-  <script src="js/main.js?v=7" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=8">
+  <script src="js/main.js?v=8" defer></script>
 </head>
 <body class="page">
   <header class="site-header">
@@ -23,24 +23,28 @@
           <li class="site-nav__item"><a class="site-nav__link" href="afisha.html">Афиша</a></li>
           <li class="site-nav__item"><a class="site-nav__link" href="booking.html">Бронирование</a></li>
           <li class="site-nav__item"><a class="site-nav__link" href="contacts.html">Контакты</a></li>
-          <li class="site-nav__item"><a class="site-nav__link" href="index.html#advantages">Преимущества</a></li>
-          <li class="site-nav__item"><a class="site-nav__link" href="index.html#now-playing">Сейчас в кино</a></li>
         </ul>
       </nav>
 
-      <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Включить светлую тему" title="Включить светлую тему">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-      </button>
+      <div class="site-header__actions">
+        <button class="button button--primary site-header__buy-btn js-quick-book" type="button" data-movie="Рождение империи">
+          Купить билет
+        </button>
+
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Включить светлую тему" title="Включить светлую тему">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -275,23 +279,39 @@
         </nav>
 
         <div class="site-footer__col">
-          <h3 class="site-footer__title">Разделы</h3>
-          <ul class="site-footer__list">
-            <li class="site-footer__item"><a class="site-footer__link" href="index.html#now-playing">Сейчас в кино</a></li>
-            <li class="site-footer__item"><a class="site-footer__link" href="index.html#advantages">Залы и преимущества</a></li>
-            <li class="site-footer__item"><a class="site-footer__link" href="contacts.html#about">История кинотеатра</a></li>
-            <li class="site-footer__item"><a class="site-footer__link" href="contacts.html#contact-info">Схема проезда</a></li>
-          </ul>
-        </div>
-
-        <div class="site-footer__col">
           <h3 class="site-footer__title">Контакты</h3>
           <ul class="site-footer__list">
-            <li class="site-footer__item">г. Москва, пр-т Вернадского, д. 78</li>
-            <li class="site-footer__item">Ежедневно с 09:00 до 02:00</li>
-            <li class="site-footer__item"><a class="site-footer__link" href="tel:+74957772400">+7 (495) 777-24-00</a></li>
-            <li class="site-footer__item"><a class="site-footer__link" href="mailto:info@moviemirea.ru">info@moviemirea.ru</a></li>
+            <li class="site-footer__item site-footer__item--icon">
+              <svg class="site-footer__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>г. Москва, пр-т Вернадского, д. 78</span>
+            </li>
+            <li class="site-footer__item site-footer__item--icon">
+              <svg class="site-footer__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>Ежедневно с 09:00 до 02:00</span>
+            </li>
+            <li class="site-footer__item site-footer__item--icon">
+              <svg class="site-footer__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <a class="site-footer__link" href="tel:+74957772400">+7 (495) 777-24-00</a>
+            </li>
+            <li class="site-footer__item site-footer__item--icon">
+              <svg class="site-footer__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <a class="site-footer__link" href="mailto:info@moviemirea.ru">info@moviemirea.ru</a>
+            </li>
           </ul>
+          <button class="button button--primary site-footer__book-btn js-quick-book" type="button" data-movie="Рождение империи">
+            Купить билет
+          </button>
         </div>
       </div>
 
