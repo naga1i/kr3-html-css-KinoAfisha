@@ -36,72 +36,106 @@
     </div>
 
     <section class="hero">
-      <span class="hero__badge">Лазерный IMAX &bull; Dolby Atmos</span>
-      <h1 class="hero__title">Кинотеатр нового поколения «KinoAfisha»</h1>
-      <p class="hero__text">
-        Погрузитесь в мир большого кино на гигантском экране IMAX с объёмным звуком Dolby Atmos,
-        мягкими креслами-реклайнерами и свежим карамельным попкорном из нашего кинобара.
-      </p>
-      <div class="hero__actions">
-        <button class="button button--primary btn-lg" type="button" id="hero-buy-ticket-btn" data-movie="Рождение империи">
-          Купить билет
-        </button>
-        <a class="button button--outline-light" href="afisha.html">Смотреть всю афишу</a>
+      <div class="hero__content">
+        <div class="hero__meta">
+          <span class="hero__tag">Премьера недели</span>
+          <span class="hero__age">12+</span>
+          <span>Историческая драма &bull; 140 мин. &bull; Зал №1 IMAX</span>
+        </div>
+
+        <h1 class="hero__title">Рождение империи</h1>
+        <p class="hero__text">
+          Масштабная историческая картина Андрея Кравчука о решающих морских и сухопутных сражениях Северной войны.
+          В главных ролях: Милош Бикович, Юлия Пересильд, Виктор Добронравов и Алексей Гуськов.
+        </p>
+
+        <div class="hero__sessions">
+          <span class="hero__sessions-label">Ближайшие сеансы сегодня:</span>
+          <div class="hero__sessions-list">
+            <a class="hero__session-chip" href="booking.html?movie=empire">12:30</a>
+            <a class="hero__session-chip" href="booking.html?movie=empire">16:00</a>
+            <a class="hero__session-chip" href="booking.html?movie=empire">19:30 &bull; IMAX</a>
+            <a class="hero__session-chip" href="booking.html?movie=empire">22:15 &bull; VIP</a>
+          </div>
+        </div>
+
+        <div class="hero__actions">
+          <button class="button button--primary btn-lg" type="button" id="hero-buy-ticket-btn" data-movie="Рождение империи">
+            Купить билет
+          </button>
+          <a class="button button--outline-light" href="booking.html?movie=empire">Выбрать места на схеме</a>
+        </div>
       </div>
+
+      <figure class="hero__poster-wrap">
+        <img
+          class="hero__poster"
+          src="images/movie-1.jpg"
+          alt="Постер фильма Рождение империи"
+          width="680"
+          height="1000"
+        >
+      </figure>
     </section>
 
     <section class="section" id="advantages">
       <div class="section__header">
         <div>
-          <h2 class="section__title">Преимущества нашего кинотеатра</h2>
-          <p class="section__text">Всё для максимального комфорта и полного погружения в сюжет каждого фильма.</p>
+          <h2 class="section__title">Преимущества кинотеатра</h2>
+          <p class="section__text">Что ждёт зрителей на каждом сеансе в «KinoAfisha».</p>
         </div>
       </div>
 
       <div class="advantages-grid">
         <article class="advantage-card">
-          <div class="advantage-card__header">
-            <div class="advantage-card__icon" aria-hidden="true">IMAX</div>
-            <h3 class="advantage-card__title">Залы IMAX 4K</h3>
+          <img
+            class="advantage-card__image"
+            src="images/adv-imax.jpg"
+            alt="Большой экран зала IMAX"
+            width="700"
+            height="440"
+            loading="lazy"
+          >
+          <div class="advantage-card__body">
+            <h3 class="advantage-card__title">Залы IMAX</h3>
+            <p class="advantage-card__text">
+              Панорамный экран шириной 24 метра с лазерным проектором 4K и многоканальным звуком Dolby Atmos.
+            </p>
           </div>
-          <p class="advantage-card__text">
-            Двойная лазерная проекция 4K на панорамный экран шириной 24 метра и 64-канальная система Dolby Atmos обеспечивают кристальную чёткость и живой объёмный звук.
-          </p>
-          <ul class="advantage-card__features">
-            <li>Экран 24 &times; 14 метров высокой контрастности</li>
-            <li>Лазерный проектор нового поколения</li>
-            <li>Объёмный звук 360&deg; Dolby Atmos</li>
-          </ul>
         </article>
 
         <article class="advantage-card">
-          <div class="advantage-card__header">
-            <div class="advantage-card__icon" aria-hidden="true">VIP</div>
+          <img
+            class="advantage-card__image"
+            src="images/adv-seats.jpg"
+            alt="Мягкие кресла в зрительном зале"
+            width="700"
+            height="440"
+            loading="lazy"
+          >
+          <div class="advantage-card__body">
             <h3 class="advantage-card__title">Удобные кресла</h3>
+            <p class="advantage-card__text">
+              Широкие проходы между рядами, мягкие кресла с подстаканниками и раскладывающиеся реклайнеры в VIP-рядах.
+            </p>
           </div>
-          <p class="advantage-card__text">
-            Анатомические кожаные кресла-реклайнеры с электроприводом спинки и подставки для ног, увеличенным расстоянием между рядами и индивидуальными столиками.
-          </p>
-          <ul class="advantage-card__features">
-            <li>Раскладывание кресла до 160 градусов</li>
-            <li>Широкие проходы между рядами (до 1,8 м)</li>
-            <li>Беспроводная зарядка и столик у места</li>
-          </ul>
         </article>
 
         <article class="advantage-card">
-          <div class="advantage-card__header">
-            <div class="advantage-card__icon" aria-hidden="true">BAR</div>
-            <h3 class="advantage-card__title">Кинобар и лаунж</h3>
+          <img
+            class="advantage-card__image"
+            src="images/adv-bar.jpg"
+            alt="Свежий попкорн в кинобаре"
+            width="700"
+            height="440"
+            loading="lazy"
+          >
+          <div class="advantage-card__body">
+            <h3 class="advantage-card__title">Кинобар</h3>
+            <p class="advantage-card__text">
+              Горячий карамельный и сырный попкорн прямо из печи, хрустящие начос с соусами и прохладительные напитки.
+            </p>
           </div>
-          <p class="advantage-card__text">
-            Хрустящий сырный и карамельный попкорн, начос с горячими соусами, авторские лимонады и свежесваренный кофе с возможностью заказа прямо к вашему креслу.
-          </p>
-          <ul class="advantage-card__features">
-            <li>Свежий попкорн 5 вкусов из собственной печи</li>
-            <li>Горячие закуски, комбо-наборы и десерты</li>
-            <li>Доставка заказа по QR-коду в VIP-ряды</li>
-          </ul>
         </article>
       </div>
     </section>
