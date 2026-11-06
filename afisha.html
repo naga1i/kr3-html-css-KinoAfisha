@@ -6,8 +6,8 @@
   <meta name="description" content="Афиша кинотеатра MovieMirea — 8 реальных фильмов в прокате и скоро на экранах, фильтрация по жанру и возрастному рейтингу.">
   <title>Афиша — Кинотеатр MovieMirea</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=8">
-  <script src="js/main.js?v=8" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=9">
+  <script src="js/main.js?v=9" defer></script>
 </head>
 <body class="page">
   <header class="site-header">
@@ -145,13 +145,35 @@
           <p class="afisha-movies__count" id="afisha-movies-count">Найдено фильмов: 8 из 8</p>
         </div>
 
-        <div class="alert alert-warning" id="afisha-empty-message" hidden>
-          По выбранным параметрам фильмы не найдены. Попробуйте сбросить часть фильтров.
+        <div class="afisha-toolbar row g-3 mb-4">
+          <div class="col-md-7">
+            <label class="visually-hidden" for="afisha-search">Поиск фильма по названию</label>
+            <input
+              class="booking-form__input form-control"
+              id="afisha-search"
+              type="search"
+              placeholder="Поиск фильма по названию (например, Битва моторов)..."
+              autocomplete="off"
+            >
+          </div>
+          <div class="col-md-5">
+            <label class="visually-hidden" for="afisha-sort">Сортировка фильмов</label>
+            <select class="booking-form__select form-select" id="afisha-sort">
+              <option value="default">Сортировка: по умолчанию</option>
+              <option value="price-asc">По цене: сначала дешевле</option>
+              <option value="price-desc">По цене: сначала дороже</option>
+              <option value="title-asc">По названию: А — Я</option>
+            </select>
+          </div>
         </div>
 
-        <div class="movies-grid">
+        <div class="alert alert-warning" id="afisha-empty-message" hidden>
+          По выбранным параметрам фильмы не найдены. Попробуйте изменить запрос или сбросить фильтры.
+        </div>
+
+        <div class="movies-grid" id="afisha-movies-grid">
           <!-- Фильм 1 -->
-          <article class="movie-card movie-card--premiere js-afisha-card" data-genre="drama" data-age="12+" data-badge="Премьера">
+          <article class="movie-card movie-card--premiere js-afisha-card" data-genre="drama" data-age="12+" data-badge="Премьера" data-price="550" data-title="Рождение империи">
             <div class="movie-card__poster-wrap">
               <img class="movie-card__image" src="images/movie-1.jpg" alt="Постер фильма Рождение империи" width="680" height="1000" loading="lazy">
               <span class="movie-card__badge movie-card__badge--premiere badge">Премьера</span>
@@ -170,7 +192,7 @@
           </article>
 
           <!-- Фильм 2 -->
-          <article class="movie-card movie-card--hit js-afisha-card" data-genre="drama" data-age="12+" data-badge="Хит">
+          <article class="movie-card movie-card--hit js-afisha-card" data-genre="drama" data-age="12+" data-badge="Хит" data-price="520" data-title="Битва моторов">
             <div class="movie-card__poster-wrap">
               <img class="movie-card__image" src="images/movie-2.jpg" alt="Постер фильма Битва моторов" width="680" height="1000" loading="lazy">
               <span class="movie-card__badge movie-card__badge--hit badge">Хит</span>
@@ -189,7 +211,7 @@
           </article>
 
           <!-- Фильм 3 -->
-          <article class="movie-card movie-card--premiere js-afisha-card" data-genre="animation" data-age="6+" data-badge="Премьера">
+          <article class="movie-card movie-card--premiere js-afisha-card" data-genre="animation" data-age="6+" data-badge="Премьера" data-price="390" data-title="Барашек Шон и Чудище Лохматое">
             <div class="movie-card__poster-wrap">
               <img class="movie-card__image" src="images/movie-3.jpg" alt="Постер мультфильма Барашек Шон и Чудище Лохматое" width="680" height="1000" loading="lazy">
               <span class="movie-card__badge movie-card__badge--premiere badge">Премьера</span>
@@ -208,7 +230,7 @@
           </article>
 
           <!-- Фильм 4 -->
-          <article class="movie-card movie-card--hit js-afisha-card" data-genre="fantasy" data-age="6+" data-badge="Хит">
+          <article class="movie-card movie-card--hit js-afisha-card" data-genre="fantasy" data-age="6+" data-badge="Хит" data-price="450" data-title="Чудо-Юдо">
             <div class="movie-card__poster-wrap">
               <img class="movie-card__image" src="images/movie-5.jpg" alt="Постер фильма Чудо-Юдо" width="680" height="1000" loading="lazy">
               <span class="movie-card__badge movie-card__badge--hit badge">Хит</span>
@@ -227,7 +249,7 @@
           </article>
 
           <!-- Фильм 5 -->
-          <article class="movie-card movie-card--premiere js-afisha-card" data-genre="action" data-age="16+" data-badge="Премьера">
+          <article class="movie-card movie-card--premiere js-afisha-card" data-genre="action" data-age="16+" data-badge="Премьера" data-price="490" data-title="Большие гонки. Пегас III">
             <div class="movie-card__poster-wrap">
               <img class="movie-card__image" src="images/movie-6.jpg" alt="Постер фильма Большие гонки. Пегас III" width="680" height="1000" loading="lazy">
               <span class="movie-card__badge movie-card__badge--premiere badge">Премьера</span>
@@ -246,7 +268,7 @@
           </article>
 
           <!-- Фильм 6 -->
-          <article class="movie-card movie-card--premiere js-afisha-card" data-genre="action" data-age="18+" data-badge="Премьера">
+          <article class="movie-card movie-card--premiere js-afisha-card" data-genre="action" data-age="18+" data-badge="Премьера" data-price="650" data-title="Зверь">
             <div class="movie-card__poster-wrap">
               <img class="movie-card__image" src="images/movie-7.jpg" alt="Постер фильма Зверь" width="680" height="1000" loading="lazy">
               <span class="movie-card__badge movie-card__badge--premiere badge">Премьера</span>
@@ -265,7 +287,7 @@
           </article>
 
           <!-- Фильм 7 -->
-          <article class="movie-card movie-card--soon js-afisha-card" data-genre="fantasy" data-age="12+" data-badge="Скоро">
+          <article class="movie-card movie-card--soon js-afisha-card" data-genre="fantasy" data-age="12+" data-badge="Скоро" data-price="580" data-title="Голодные игры: Рассвет жатвы">
             <div class="movie-card__poster-wrap">
               <img class="movie-card__image" src="images/movie-4.jpg" alt="Постер фильма Голодные игры: Рассвет жатвы" width="680" height="1000" loading="lazy">
               <span class="movie-card__badge movie-card__badge--soon badge">Скоро</span>
@@ -284,7 +306,7 @@
           </article>
 
           <!-- Фильм 8 -->
-          <article class="movie-card movie-card--soon js-afisha-card" data-genre="animation" data-age="6+" data-badge="Скоро">
+          <article class="movie-card movie-card--soon js-afisha-card" data-genre="animation" data-age="6+" data-badge="Скоро" data-price="450" data-title="Чебурашка 3">
             <div class="movie-card__poster-wrap">
               <img class="movie-card__image" src="images/movie-8.jpg" alt="Постер фильма Чебурашка 3" width="680" height="1000" loading="lazy">
               <span class="movie-card__badge movie-card__badge--soon badge">Скоро</span>
