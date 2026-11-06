@@ -180,14 +180,22 @@ if (quickBookingDialog && quickBookingForm) {
 }
 
 // ===============================
-// 3. Фильтрация фильмов на странице Афиши (afisha.html)
+// 3. Фильтрация, живой поиск и сортировка фильмов на странице Афиши (afisha.html)
 // ===============================
 const afishaFilterForm = document.getElementById('afisha-filter-form');
-const afishaCards = document.querySelectorAll('.js-afisha-card');
+const afishaMoviesGrid = document.getElementById('afisha-movies-grid');
+const afishaCards = Array.from(document.querySelectorAll('.js-afisha-card'));
 const afishaCountEl = document.getElementById('afisha-movies-count');
 const afishaEmptyMessage = document.getElementById('afisha-empty-message');
+const afishaSearchInput = document.getElementById('afisha-search');
+const afishaSortSelect = document.getElementById('afisha-sort');
 
 if (afishaFilterForm && afishaCards.length > 0) {
+  // Запоминаем исходный порядок карточек
+  afishaCards.forEach((card, index) => {
+    card.dataset.initialIndex = String(index);
+  });
+
   const applyAfishaFilters = () => {
     const selectedGenreInput = afishaFilterForm.querySelector('input[name="genre"]:checked');
     const selectedGenre = selectedGenreInput ? selectedGenreInput.value : 'all';
@@ -199,23 +207,46 @@ if (afishaFilterForm && afishaCards.length > 0) {
     const badgeSelect = document.getElementById('filter-badge');
     const selectedBadge = badgeSelect ? badgeSelect.value : 'all';
 
+    const searchQuery = afishaSearchInput ? afishaSearchInput.value.trim().toLowerCase() : '';
+    const sortMode = afishaSortSelect ? afishaSortSelect.value : 'default';
+
     let visibleCount = 0;
 
     afishaCards.forEach((card) => {
       const cardGenre = card.dataset.genre || '';
       const cardAge = card.dataset.age || '';
       const cardBadge = card.dataset.badge || '';
+      const cardTitle = (card.dataset.title || '').toLowerCase();
 
       const matchesGenre = selectedGenre === 'all' || cardGenre === selectedGenre;
       const matchesAge = checkedAges.length === 0 || checkedAges.includes(cardAge);
       const matchesBadge = selectedBadge === 'all' || cardBadge === selectedBadge;
+      const matchesSearch = searchQuery === '' || cardTitle.includes(searchQuery);
 
-      const isVisible = matchesGenre && matchesAge && matchesBadge;
+      const isVisible = matchesGenre && matchesAge && matchesBadge && matchesSearch;
       card.hidden = !isVisible;
       if (isVisible) {
         visibleCount += 1;
       }
     });
+
+    // Сортируем карточки в сетке
+    if (afishaMoviesGrid) {
+      const sortedCards = [...afishaCards].sort((a, b) => {
+        if (sortMode === 'price-asc') {
+          return Number(a.dataset.price || 0) - Number(b.dataset.price || 0);
+        }
+        if (sortMode === 'price-desc') {
+          return Number(b.dataset.price || 0) - Number(a.dataset.price || 0);
+        }
+        if (sortMode === 'title-asc') {
+          return (a.dataset.title || '').localeCompare(b.dataset.title || '', 'ru');
+        }
+        return Number(a.dataset.initialIndex || 0) - Number(b.dataset.initialIndex || 0);
+      });
+
+      sortedCards.forEach((card) => afishaMoviesGrid.appendChild(card));
+    }
 
     if (afishaCountEl) {
       afishaCountEl.textContent = `Найдено фильмов: ${visibleCount} из ${afishaCards.length}`;
@@ -233,7 +264,21 @@ if (afishaFilterForm && afishaCards.length > 0) {
 
   afishaFilterForm.addEventListener('change', applyAfishaFilters);
 
+  if (afishaSearchInput) {
+    afishaSearchInput.addEventListener('input', applyAfishaFilters);
+  }
+
+  if (afishaSortSelect) {
+    afishaSortSelect.addEventListener('change', applyAfishaFilters);
+  }
+
   afishaFilterForm.addEventListener('reset', () => {
+    if (afishaSearchInput) {
+      afishaSearchInput.value = '';
+    }
+    if (afishaSortSelect) {
+      afishaSortSelect.value = 'default';
+    }
     setTimeout(applyAfishaFilters, 0);
   });
 
@@ -333,9 +378,11 @@ if (bookingPageForm && hallGrid) {
   const summaryHall = document.getElementById('summary-hall');
   const summarySession = document.getElementById('summary-session');
   const summarySeats = document.getElementById('summary-seats');
+  const summarySnacks = document.getElementById('summary-snacks');
   const summaryTotalPrice = document.getElementById('summary-total-price');
   const bookingSuccessAlert = document.getElementById('booking-success-alert');
   const bookingSeatError = document.getElementById('booking-seat-error');
+  const snackCheckboxes = Array.from(document.querySelectorAll('.js-snack-checkbox'));
 
   // Подставляем фильм из URL-параметра ?movie=...
   const urlMovieParam = new URLSearchParams(window.location.search).get('movie');
@@ -364,7 +411,7 @@ if (bookingPageForm && hallGrid) {
     const totalSeats = config.rows * config.seatsPerRow;
 
     if (hallTitleEl) {
-      hallTitleEl.textContent = `3. ${config.hallName} — выберите места`;
+      hallTitleEl.textContent = `4. ${config.hallName} — выберите места`;
     }
     if (hallBadgeEl) {
       hallBadgeEl.textContent = `${config.rows} рядов • ${totalSeats} мест`;
@@ -431,10 +478,17 @@ if (bookingPageForm && hallGrid) {
       total += isVipSeat ? ticketPrices.vip : ticketPrices.standard;
     });
 
+    const selectedSnacks = snackCheckboxes.filter((cb) => cb.checked);
+    selectedSnacks.forEach((cb) => {
+      total += Number(cb.dataset.price || 0);
+    });
+
     const seatLabels = selectedSeatButtons.map((btn) => {
       const isVipSeat = btn.dataset.seatType === 'vip';
       return `Ряд ${btn.dataset.row}, Место ${btn.dataset.seat}${isVipSeat ? ' (VIP)' : ''}`;
     });
+
+    const snackLabels = selectedSnacks.map((cb) => `${cb.value} (+${cb.dataset.price} руб.)`);
 
     if (selectedSeatsInput) {
       selectedSeatsInput.value = seatLabels.join('; ');
@@ -457,6 +511,11 @@ if (bookingPageForm && hallGrid) {
         seatLabels.length > 0
           ? `${seatLabels.join(', ')} (${seatLabels.length} шт.)`
           : 'Места не выбраны';
+    }
+
+    if (summarySnacks) {
+      summarySnacks.textContent =
+        snackLabels.length > 0 ? snackLabels.join(', ') : 'Не выбрано';
     }
 
     if (summaryTotalPrice) {
@@ -490,7 +549,7 @@ if (bookingPageForm && hallGrid) {
     updateBookingSummary();
   });
 
-  [dateInput, sessionSelect].forEach((control) => {
+  [dateInput, sessionSelect, ...snackCheckboxes].forEach((control) => {
     if (control) {
       control.addEventListener('change', updateBookingSummary);
       control.addEventListener('input', updateBookingSummary);
